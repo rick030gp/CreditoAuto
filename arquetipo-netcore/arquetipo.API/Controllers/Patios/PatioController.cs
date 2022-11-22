@@ -1,57 +1,57 @@
-﻿using arquetipo.Domain.Interfaces.Services.Clientes;
+﻿using arquetipo.Domain.Interfaces.Services.Patios;
 using arquetipo.Entity.DTOs;
 using arquetipo.Entity.Models;
 using arquetipo.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 using System.Net;
+using System.Text.Json;
 
-namespace arquetipo.API.Controllers.Clients
+namespace arquetipo.API.Controllers.Patios
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class ClienteController : ControllerBase
+    public class PatioController : ControllerBase
     {
-        private readonly IClienteInfraestructura _clienteInfraestructura;
+        private readonly IPatioInfraestructura _patioInfraestructura;
 
-        public ClienteController(IClienteInfraestructura clienteInfraestructura)
+        public PatioController(IPatioInfraestructura patioInfraestructura)
         {
-            _clienteInfraestructura = clienteInfraestructura;
+            _patioInfraestructura = patioInfraestructura;
         }
 
         [HttpGet]
         [Route("Consultar001")]
-        public async Task<IEnumerable<ECliente>> ConsultarClientesAsync()
+        public async Task<IEnumerable<EPatio>> ConsultarPatiosAsync()
         {
-            return await _clienteInfraestructura.ConsultarClientesAsync();
+            return await _patioInfraestructura.ConsultarPatiosAsync();
         }
 
         [HttpGet]
-        [Route("Consultar001/{identificacion}")]
-        public async Task<IActionResult> ConsultarClientePorIdentificacionAsync(string identificacion)
+        [Route("Consultar001/{numeroPuntoVenta}")]
+        public async Task<IActionResult> ConsultarPatioPorPuntoVentaAsync(short numeroPuntoVenta)
         {
             try
             {
-                var cliente = await _clienteInfraestructura.ConsultarClientePorIdentificacionAsync(identificacion);
-                return Ok(cliente);
+                var patio = await _patioInfraestructura.ConsultarPatioPorPuntoVentaAsync(numeroPuntoVenta);
+                return Ok(patio);
             }
             catch (CrAutoExcepcion ex)
             {
                 var result = Content(JsonSerializer.Serialize(new Error(ex)));
-                HttpContext.Response.StatusCode = (int) HttpStatusCode.Accepted;
+                HttpContext.Response.StatusCode = (int)HttpStatusCode.Accepted;
                 return result;
             }
         }
 
         [HttpPost]
         [Route("Registrar202")]
-        public async Task<IActionResult> CrearClienteAsync(ECrearClienteDto input)
+        public async Task<IActionResult> CrearPatioAsync(ECrearPatioDto input)
         {
             try
             {
-                var cliente = await _clienteInfraestructura.CrearClienteAsync(input);
-                return Ok(cliente);
+                var patio = await _patioInfraestructura.CrearPatioAsync(input);
+                return Ok(patio);
             }
             catch (CrAutoExcepcion ex)
             {
@@ -62,13 +62,13 @@ namespace arquetipo.API.Controllers.Clients
         }
 
         [HttpPatch]
-        [Route("Actualizar303/{identificacion}")]
-        public async Task<IActionResult> ActualizarClienteAsync(string identificacion, JsonPatchDocument<ECliente> input)
+        [Route("Actualizar303/{numeroPuntoVenta}")]
+        public async Task<IActionResult> ActualizarPatioAsync(short numeroPuntoVenta, JsonPatchDocument<EPatio> input)
         {
             try
             {
-                var cliente = await _clienteInfraestructura.ActualizarClienteAsync(identificacion, input);
-                return Ok(cliente);
+                var patio = await _patioInfraestructura.ActualizarPatioAsync(numeroPuntoVenta, input);
+                return Ok(patio);
             }
             catch (CrAutoExcepcion ex)
             {
@@ -80,11 +80,11 @@ namespace arquetipo.API.Controllers.Clients
 
         [HttpDelete]
         [Route("Eliminar404")]
-        public async Task<IActionResult> EliminarClienteAsync(string identificacion)
+        public async Task<IActionResult> EliminarPatioAsync(short numeroPuntoVenta)
         {
             try
             {
-                var result = await _clienteInfraestructura.EliminarClienteAsync(identificacion);
+                var result = await _patioInfraestructura.EliminarPatioAsync(numeroPuntoVenta);
                 return Ok(result);
             }
             catch (CrAutoExcepcion ex)

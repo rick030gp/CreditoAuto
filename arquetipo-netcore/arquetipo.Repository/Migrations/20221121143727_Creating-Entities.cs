@@ -22,8 +22,8 @@ namespace arquetipo.Repository.Migrations
                     Direccion = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     EstadoCivil = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
-                    IdentificacionConyugue = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    NombreConyugue = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    IdentificacionConyugue = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    NombreConyugue = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: true),
                     EsSujetoCredito = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -198,6 +198,12 @@ namespace arquetipo.Repository.Migrations
                 name: "IX_Ejecutivo_PatioId",
                 table: "Ejecutivo",
                 column: "PatioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Patio_NumeroPuntoVenta",
+                table: "Patio",
+                column: "NumeroPuntoVenta",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_SolicitudCredito_ClienteId",

@@ -2,25 +2,22 @@
 using arquetipo.Entity.DTOs;
 using arquetipo.Entity.Models;
 using arquetipo.Infrastructure.Exceptions;
-using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 
 namespace arquetipo.Infrastructure.Services.Clientes
 {
     public class ClienteInfraestructura : IClienteInfraestructura
     {
-        private IClienteRepositorio _clienteRepositorio;
-        private readonly IMapper _mapper;
+        private readonly IClienteRepositorio _clienteRepositorio;
 
-        public ClienteInfraestructura(IClienteRepositorio clienteRepositorio, IMapper mapper)
+        public ClienteInfraestructura(IClienteRepositorio clienteRepositorio)
         {
             _clienteRepositorio = clienteRepositorio;
-            _mapper = mapper;
         }
 
         public async Task<ECliente> ActualizarClienteAsync(string identificacion, JsonPatchDocument<ECliente> input)
         {
-            if (input == null)
+            if (!input.Operations.Any())
                 throw new CrAutoExcepcion(CrAutoErrores.ActualizacionDatosVaciosError);
 
             var cliente = await _clienteRepositorio.ObtenerPorIdentificacionAsync(identificacion);

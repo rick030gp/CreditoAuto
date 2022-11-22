@@ -11,7 +11,7 @@
         public decimal Cuotas { get; set; }
         public decimal Entrada { get; set; }
         public Guid EjecutivoId { get; set; }
-        public string Observacion { get; set; }
+        public string? Observacion { get; set; }
         public EstadoSolicitud Estado { get; set; }
     }
 

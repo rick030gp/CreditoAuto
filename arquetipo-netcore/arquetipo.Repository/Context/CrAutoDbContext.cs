@@ -49,6 +49,7 @@ namespace arquetipo.Repository.Context
                 marca.ToTable(EConstante.MARCA_TABLENAME);
                 marca.HasKey(m => m.Id);
                 marca.Property(m => m.Nombre).HasMaxLength(EConstante.NOMBRES_MAXLENGTH);
+                marca.HasIndex(m => m.Nombre).IsUnique();
             });
 
             modelBuilder.Entity<EEjecutivo>(ejecutivo =>
@@ -75,7 +76,7 @@ namespace arquetipo.Repository.Context
                 vehiculo.HasIndex(v => v.Placa).IsUnique();
                 vehiculo.Property(v => v.Modelo).HasMaxLength(EConstante.NOMBRES_MAXLENGTH);
                 vehiculo.Property(v => v.NumeroChasis).HasMaxLength(EConstante.CODIGO_MAXLENGTH);
-                vehiculo.Property(v => v.Tipo).IsRequired(false).HasMaxLength(EConstante.CODIGO_MAXLENGTH);
+                vehiculo.Property(v => v.Tipo).HasMaxLength(EConstante.CODIGO_MAXLENGTH);
                 vehiculo.Property(v => v.Cilindraje);
                 vehiculo.Property(v => v.Avaluo).HasColumnType("decimal(18,2)");
                 vehiculo.HasOne<EMarca>().WithMany()
@@ -91,7 +92,7 @@ namespace arquetipo.Repository.Context
                 solicitud.Property(s => s.MesesPlazo);
                 solicitud.Property(s => s.Cuotas).HasColumnType("decimal(18,2)");
                 solicitud.Property(s => s.Entrada).HasColumnType("decimal(18,2)");
-                solicitud.Property(s => s.Observacion).IsRequired(false).HasMaxLength(EConstante.DESCRIPCION_MAXLENGTH);
+                solicitud.Property(s => s.Observacion).HasMaxLength(EConstante.DESCRIPCION_MAXLENGTH);
                 solicitud.Property(s => s.Estado)
                     .HasMaxLength(EConstante.CODIGO_MAXLENGTH)
                     .HasConversion(e => e.ToString(), e => (EstadoSolicitud)Enum.Parse(typeof(EstadoSolicitud), e));

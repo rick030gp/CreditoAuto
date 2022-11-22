@@ -18,7 +18,7 @@ namespace arquetipo.Repository.Services
             return await _context.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<TEntity> ObtenerPorId(TKey id)
+        public async Task<TEntity?> ObtenerPorId(TKey id)
         {
             return await _context.Set<TEntity>().FindAsync(id);
         }

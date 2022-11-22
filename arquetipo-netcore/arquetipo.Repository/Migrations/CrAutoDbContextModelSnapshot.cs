@@ -58,12 +58,10 @@ namespace arquetipo.Repository.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("IdentificacionConyugue")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("NombreConyugue")
-                        .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 

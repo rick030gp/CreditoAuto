@@ -11,8 +11,8 @@
         public string Direccion { get; set; }
         public string Telefono { get; set; }
         public string EstadoCivil { get; set; }
-        public string IdentificacionConyugue { get; set; }
-        public string NombreConyugue { get; set; }
+        public string? IdentificacionConyugue { get; set; }
+        public string? NombreConyugue { get; set; }
         public bool EsSujetoCredito { get; set; }
 
         public ECliente(
@@ -27,7 +27,7 @@
             string estadoCivil,
             string identificacionConyugue,
             string nombreConyugue,
-            bool esSujetoCredito)
+            bool esSujetoCredito = true)
         {
             Id = id;
             Identificacion = identificacion;

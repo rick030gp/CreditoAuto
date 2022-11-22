@@ -7,9 +7,9 @@ namespace arquetipo.Domain.Interfaces.Services.Patios
     public interface IPatioInfraestructura
     {
         Task<IEnumerable<EPatio>> ConsultarPatiosAsync();
-        Task<EPatio> ConsultarPatioPorIdAsync(Guid id);
+        Task<EPatio> ConsultarPatioPorPuntoVentaAsync(short numeroPuntoVenta);
         Task<EPatio> CrearPatioAsync(ECrearPatioDto input);
-        Task<ECliente> ActualizarPatioAsync(Guid id, JsonPatchDocument<EPatio> input);
-        Task<string> EliminarPatioAsync(Guid id);
+        Task<EPatio> ActualizarPatioAsync(short numeroPuntoVenta, JsonPatchDocument<EPatio> input);
+        Task<string> EliminarPatioAsync(short numeroPuntoVenta);
     }
 }

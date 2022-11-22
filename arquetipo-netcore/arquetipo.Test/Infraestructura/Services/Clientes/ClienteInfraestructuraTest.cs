@@ -4,7 +4,6 @@ using arquetipo.Entity.Models;
 using arquetipo.Infrastructure;
 using arquetipo.Infrastructure.Exceptions;
 using arquetipo.Infrastructure.Services.Clientes;
-using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Moq;
 using System;
@@ -17,9 +16,8 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
 {
     public class ClienteInfraestructuraTest
     {
-        private Mock<IClienteRepositorio> _clienteRepositorioMock;
-        private List<ECliente> _clientesSeed;
-        private IMapper _mapper;
+        private readonly Mock<IClienteRepositorio> _clienteRepositorioMock;
+        private readonly List<ECliente> _clientesSeed;
 
         public ClienteInfraestructuraTest()
         {
@@ -29,16 +27,6 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
                 new ECliente(Guid.NewGuid(), "CL02", "NOM02", "AP02", 20, Convert.ToDateTime("12/01/2002"), "D02", "TL02", "SOLTERO", null, null, false),
             };
             _clienteRepositorioMock = new Mock<IClienteRepositorio>();
-
-            MapperConfiguration mapperConfig = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AddProfile(new CrAutoMapperProfile());
-                });
-
-            _mapper = new Mapper(mapperConfig);
-            _mapper.ConfigurationProvider.AssertConfigurationIsValid();
-
         }
 
         #region ConsultarClientesAsync
@@ -48,8 +36,7 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
             _clienteRepositorioMock.Setup(cr => cr.ObtenerTodoAsync())
                 .ReturnsAsync(_clientesSeed);
             var clienteInfraestructura = new ClienteInfraestructura(
-                _clienteRepositorioMock.Object,
-                _mapper);
+                _clienteRepositorioMock.Object);
 
             var clientes = await clienteInfraestructura.ConsultarClientesAsync();
 
@@ -62,8 +49,7 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
             _clienteRepositorioMock.Setup(cr => cr.ObtenerTodoAsync())
                 .ReturnsAsync(new List<ECliente>());
             var clienteInfraestructura = new ClienteInfraestructura(
-                _clienteRepositorioMock.Object,
-                _mapper);
+                _clienteRepositorioMock.Object);
 
             var clientes = await clienteInfraestructura.ConsultarClientesAsync();
 
@@ -76,12 +62,11 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
         public async void Should_ConsultarClientePorIdentificacion_Ok()
         {
             const string IDENTIFICACION = "CL01";
-            ECliente clienteSeed = new ECliente(Guid.NewGuid(), "CL01", "NOM01", "AP01", 22, Convert.ToDateTime("12/01/2000"), "D01", "TL01", "SOLTERO", null, null, true);
+            var clienteSeed = new ECliente(Guid.NewGuid(), "CL01", "NOM01", "AP01", 22, Convert.ToDateTime("12/01/2000"), "D01", "TL01", "SOLTERO", null, null, true);
             _clienteRepositorioMock.Setup(cr => cr.ObtenerPorIdentificacionAsync(IDENTIFICACION))
                 .ReturnsAsync(clienteSeed);
             var clienteInfraestructura = new ClienteInfraestructura(
-                _clienteRepositorioMock.Object,
-                _mapper);
+                _clienteRepositorioMock.Object);
 
             var cliente = await clienteInfraestructura.ConsultarClientePorIdentificacionAsync(IDENTIFICACION);
 
@@ -93,10 +78,9 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
         {
             const string IDENTIFICACION = "CL02";
             _clienteRepositorioMock.Setup(cr => cr.ObtenerPorIdentificacionAsync(IDENTIFICACION))
-                .Returns(Task.FromResult<ECliente>(null));
+                .Returns(Task.FromResult<ECliente?>(null));
             var clienteInfraestructura = new ClienteInfraestructura(
-                _clienteRepositorioMock.Object,
-                _mapper);
+                _clienteRepositorioMock.Object);
 
             Task act() => clienteInfraestructura.ConsultarClientePorIdentificacionAsync(IDENTIFICACION);
             var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
@@ -126,8 +110,7 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
             _clienteRepositorioMock.Setup(cr => cr.ObtenerPorIdentificacionAsync(input.Identificacion))
                 .ReturnsAsync(_clientesSeed.First(c => c.Identificacion == input.Identificacion));
             var clienteInfraestructura = new ClienteInfraestructura(
-                _clienteRepositorioMock.Object,
-                _mapper);
+                _clienteRepositorioMock.Object);
 
             Task act() => clienteInfraestructura.CrearClienteAsync(input);
             var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
@@ -153,14 +136,13 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
             };
 
             _clienteRepositorioMock.Setup(cr => cr.ObtenerPorIdentificacionAsync(input.Identificacion))
-                .Returns(Task.FromResult<ECliente>(null));
+                .Returns(Task.FromResult<ECliente?>(null));
 
             _clienteRepositorioMock.Setup(cr => cr.InsertarAsync(It.IsAny<ECliente>()))
                 .ReturnsAsync((ECliente c) => c);
 
             var clienteInfraestructura = new ClienteInfraestructura(
-                _clienteRepositorioMock.Object,
-                _mapper);
+                _clienteRepositorioMock.Object);
 
             var cliente = await clienteInfraestructura.CrearClienteAsync(input);
             Assert.Equal(input.Identificacion, cliente.Identificacion);
@@ -179,10 +161,10 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
                 .ReturnsAsync((ECliente c) => c);
 
             var clienteInfraestructura = new ClienteInfraestructura(
-                _clienteRepositorioMock.Object,
-                _mapper);
+                _clienteRepositorioMock.Object);
 
-            Task act() => clienteInfraestructura.ActualizarClienteAsync(IDENTIFICACION, null);
+            JsonPatchDocument<ECliente> jsonPatch = new();
+            Task act() => clienteInfraestructura.ActualizarClienteAsync(IDENTIFICACION, jsonPatch);
             var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
             Assert.NotNull(exception);
@@ -198,10 +180,9 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
             const short NUEVA_EDAD = 25;
 
             _clienteRepositorioMock.Setup(cr => cr.ObtenerPorIdentificacionAsync(IDENTIFICACION))
-                .Returns(Task.FromResult<ECliente>(null));
+                .Returns(Task.FromResult<ECliente?>(null));
             var clienteInfraestructura = new ClienteInfraestructura(
-                _clienteRepositorioMock.Object,
-                _mapper);
+                _clienteRepositorioMock.Object);
 
             var jsonObject = new JsonPatchDocument<ECliente>();
             jsonObject.Replace(j => j.Nombres, NUEVO_NOMBRE);
@@ -230,8 +211,7 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
                 .ReturnsAsync((ECliente c) => c);
 
             var clienteInfraestructura = new ClienteInfraestructura(
-                _clienteRepositorioMock.Object,
-                _mapper);
+                _clienteRepositorioMock.Object);
 
             var jsonObject = new JsonPatchDocument<ECliente>();
             jsonObject.Replace(j => j.Nombres, NUEVO_NOMBRE);
@@ -250,11 +230,10 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
         {
             const string IDENTIFICACION = "CL10";
             _clienteRepositorioMock.Setup(cr => cr.ObtenerPorIdentificacionAsync(IDENTIFICACION))
-                .Returns(Task.FromResult<ECliente>(null));
+                .Returns(Task.FromResult<ECliente?>(null));
 
             var clienteInfraestructura = new ClienteInfraestructura(
-                _clienteRepositorioMock.Object,
-                _mapper);
+                _clienteRepositorioMock.Object);
 
             Task act() => clienteInfraestructura.EliminarClienteAsync(IDENTIFICACION);
             var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
@@ -292,8 +271,7 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
             _clienteRepositorioMock.Setup(cr => cr.EliminarAsync(It.IsAny<ECliente>()));
 
             var clienteInfraestructura = new ClienteInfraestructura(
-                _clienteRepositorioMock.Object,
-                _mapper);
+                _clienteRepositorioMock.Object);
 
             var resultado = await clienteInfraestructura.EliminarClienteAsync(IDENTIFICACION);
             Assert.Equal(EConstante.CLIENTE_ELIMINADO, resultado);

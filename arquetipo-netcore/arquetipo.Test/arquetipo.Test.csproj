@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\arquetipo.API\arquetipo.API.csproj" />
     <ProjectReference Include="..\arquetipo.Domain\arquetipo.Domain.csproj" />
     <ProjectReference Include="..\arquetipo.Infrastructure\arquetipo.Infrastructure.csproj" />
   </ItemGroup>

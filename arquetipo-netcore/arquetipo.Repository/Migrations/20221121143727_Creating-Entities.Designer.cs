@@ -12,8 +12,8 @@ using arquetipo.Repository.Context;
 namespace arquetipo.Repository.Migrations
 {
     [DbContext(typeof(CrAutoDbContext))]
-    [Migration("20221121032424_Creating-PuntoVenta-Patio-Index")]
-    partial class CreatingPuntoVentaPatioIndex
+    [Migration("20221121143727_Creating-Entities")]
+    partial class CreatingEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,12 +60,10 @@ namespace arquetipo.Repository.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("IdentificacionConyugue")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("NombreConyugue")
-                        .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
