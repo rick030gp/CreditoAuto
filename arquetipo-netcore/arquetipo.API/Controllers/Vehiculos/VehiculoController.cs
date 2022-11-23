@@ -1,4 +1,4 @@
-﻿using arquetipo.Domain.Interfaces.Services.Patios;
+﻿using arquetipo.Domain.Interfaces.Services.Vehiculos;
 using arquetipo.Entity.DTOs;
 using arquetipo.Entity.Models;
 using arquetipo.Infrastructure.Exceptions;
@@ -7,34 +7,34 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
 
-namespace arquetipo.API.Controllers.Patios
+namespace arquetipo.API.Controllers.Vehiculos
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class PatioController : ControllerBase
+    public class VehiculoController : ControllerBase
     {
-        private readonly IPatioInfraestructura _patioInfraestructura;
+        private readonly IVehiculoInfraestructura _vehiculoInfraestructura;
 
-        public PatioController(IPatioInfraestructura patioInfraestructura)
+        public VehiculoController(IVehiculoInfraestructura vehiculoInfraestructura)
         {
-            _patioInfraestructura = patioInfraestructura;
+            _vehiculoInfraestructura = vehiculoInfraestructura;
         }
 
         [HttpGet]
         [Route("ConsultarTodos001")]
-        public async Task<IEnumerable<EPatio>> ConsultarPatiosAsync()
+        public async Task<IEnumerable<EVehiculo>> ConsultarVehiculosAsync()
         {
-            return await _patioInfraestructura.ConsultarPatiosAsync();
+            return await _vehiculoInfraestructura.ConsultarVehiculosAsync();
         }
 
         [HttpGet]
         [Route("Consultar002")]
-        public async Task<IActionResult> ConsultarPatioPorPuntoVentaAsync(short numeroPuntoVenta)
+        public async Task<IActionResult> ConsultarVehiculoPorPlacaAsync(string placa)
         {
             try
             {
-                var patio = await _patioInfraestructura.ConsultarPatioPorPuntoVentaAsync(numeroPuntoVenta);
-                return Ok(patio);
+                var vehiculo = await _vehiculoInfraestructura.ConsultarVehiculoPorPlacaAsync(placa);
+                return Ok(vehiculo);
             }
             catch (CrAutoExcepcion ex)
             {
@@ -46,12 +46,12 @@ namespace arquetipo.API.Controllers.Patios
 
         [HttpPost]
         [Route("Registrar203")]
-        public async Task<IActionResult> CrearPatioAsync(ECrearPatioDto input)
+        public async Task<IActionResult> CrearVehiculoAsync(ECrearVehiculoDto input)
         {
             try
             {
-                var patio = await _patioInfraestructura.CrearPatioAsync(input);
-                return Ok(patio);
+                var vehiculo = await _vehiculoInfraestructura.CrearVehiculoAsync(input);
+                return Ok(vehiculo);
             }
             catch (CrAutoExcepcion ex)
             {
@@ -62,13 +62,13 @@ namespace arquetipo.API.Controllers.Patios
         }
 
         [HttpPatch]
-        [Route("Actualizar304/{numeroPuntoVenta}")]
-        public async Task<IActionResult> ActualizarPatioAsync(short numeroPuntoVenta, JsonPatchDocument<EPatio> input)
+        [Route("Actualizar304/{placa}")]
+        public async Task<IActionResult> ActualizarPatioAsync(string placa, JsonPatchDocument<EVehiculo> input)
         {
             try
             {
-                var patio = await _patioInfraestructura.ActualizarPatioAsync(numeroPuntoVenta, input);
-                return Ok(patio);
+                var vehiculo = await _vehiculoInfraestructura.ActualizarVehiculoAsync(placa, input);
+                return Ok(vehiculo);
             }
             catch (CrAutoExcepcion ex)
             {
@@ -79,12 +79,12 @@ namespace arquetipo.API.Controllers.Patios
         }
 
         [HttpDelete]
-        [Route("Eliminar405/{numeroPuntoVenta}")]
-        public async Task<IActionResult> EliminarPatioAsync(short numeroPuntoVenta)
+        [Route("Eliminar405/{placa}")]
+        public async Task<IActionResult> EliminarPatioAsync(string placa)
         {
             try
             {
-                var result = await _patioInfraestructura.EliminarPatioAsync(numeroPuntoVenta);
+                var result = await _vehiculoInfraestructura.EliminarVehiculoAsync(placa);
                 return Ok(result);
             }
             catch (CrAutoExcepcion ex)

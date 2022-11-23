@@ -3,6 +3,7 @@ using arquetipo.Entity.DTOs;
 using arquetipo.Entity.Models;
 using arquetipo.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.EntityFrameworkCore;
 
 namespace arquetipo.Infrastructure.Services.Clientes
 {
@@ -77,7 +78,7 @@ namespace arquetipo.Infrastructure.Services.Clientes
                 await _clienteRepositorio.EliminarAsync(cliente);
                 return EConstante.CLIENTE_ELIMINADO;
             }
-            catch (Exception ex)
+            catch (DbUpdateException ex)
             {
                 throw new CrAutoExcepcion(CrAutoErrores.EliminarRelacionesExistentesError, ex);
             }

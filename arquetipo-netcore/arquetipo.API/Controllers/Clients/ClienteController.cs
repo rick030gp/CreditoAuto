@@ -21,14 +21,14 @@ namespace arquetipo.API.Controllers.Clients
         }
 
         [HttpGet]
-        [Route("Consultar001")]
+        [Route("ConsultarTodos001")]
         public async Task<IEnumerable<ECliente>> ConsultarClientesAsync()
         {
             return await _clienteInfraestructura.ConsultarClientesAsync();
         }
 
         [HttpGet]
-        [Route("Consultar001/{identificacion}")]
+        [Route("Consultar002")]
         public async Task<IActionResult> ConsultarClientePorIdentificacionAsync(string identificacion)
         {
             try
@@ -45,7 +45,7 @@ namespace arquetipo.API.Controllers.Clients
         }
 
         [HttpPost]
-        [Route("Registrar202")]
+        [Route("Registrar203")]
         public async Task<IActionResult> CrearClienteAsync(ECrearClienteDto input)
         {
             try
@@ -62,7 +62,7 @@ namespace arquetipo.API.Controllers.Clients
         }
 
         [HttpPatch]
-        [Route("Actualizar303/{identificacion}")]
+        [Route("Actualizar304/{identificacion}")]
         public async Task<IActionResult> ActualizarClienteAsync(string identificacion, JsonPatchDocument<ECliente> input)
         {
             try
@@ -79,7 +79,7 @@ namespace arquetipo.API.Controllers.Clients
         }
 
         [HttpDelete]
-        [Route("Eliminar404")]
+        [Route("Eliminar405/{identificacion}")]
         public async Task<IActionResult> EliminarClienteAsync(string identificacion)
         {
             try

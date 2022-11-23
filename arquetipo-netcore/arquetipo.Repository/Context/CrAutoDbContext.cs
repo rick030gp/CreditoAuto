@@ -113,8 +113,9 @@ namespace arquetipo.Repository.Context
             modelBuilder.Entity<EClientePatio>(clientePatio =>
             {
                 clientePatio.ToTable(EConstante.CLIENTE_PATIO_TABLENAME);
+                clientePatio.HasKey(cp => cp.Id);
                 clientePatio.Property(cp => cp.FechaAsignacion).HasDefaultValueSql("getdate()");
-                clientePatio.HasKey(cp => new { cp.ClienteId, cp.PatioId });
+                clientePatio.HasIndex(cp => new { cp.ClienteId, cp.PatioId }).IsUnique();
             });
 
             modelBuilder.Entity<EClientePatio>(clientePatio =>

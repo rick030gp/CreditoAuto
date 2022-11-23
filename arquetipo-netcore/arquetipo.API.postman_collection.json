@@ -1,0 +1,1107 @@
+{
+	"info": {
+		"_postman_id": "4fa40b78-98fa-4492-b0d5-205f34109a59",
+		"name": "arquetipo.API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4583847"
+	},
+	"item": [
+		{
+			"name": "api/v1",
+			"item": [
+				{
+					"name": "Cliente",
+					"item": [
+						{
+							"name": "/api/v1/Cliente/ConsultarTodos001",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Cliente/ConsultarTodos001",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Cliente",
+										"ConsultarTodos001"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Cliente/ConsultarTodos001",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Cliente",
+												"ConsultarTodos001"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"urn:uuid:cc07be0f-0587-5707-6c2c-f3d22b9a4e9f\",\n    \"identificacion\": \"commodo\",\n    \"nombres\": \"laboris nostrud cupidatat ut aute\",\n    \"apellidos\": \"dolor deserunt non\",\n    \"edad\": -90926884,\n    \"fechaNacimiento\": \"1970-04-14T01:27:53.626Z\",\n    \"direccion\": \"sint tempor non\",\n    \"telefono\": \"sunt enim ullamco et\",\n    \"estadoCivil\": \"eu\",\n    \"identificacionConyugue\": \"nulla voluptate qui\",\n    \"nombreConyugue\": \"dolore labore\",\n    \"esSujetoCredito\": false\n  },\n  {\n    \"id\": \"d16743c0-6db1-c2fc-0de7-b7c5af5c36b3\",\n    \"identificacion\": \"minim aliqua consequat aute\",\n    \"nombres\": \"in enim consequat\",\n    \"apellidos\": \"elit labore nulla Excepteur\",\n    \"edad\": -29597886,\n    \"fechaNacimiento\": \"1990-07-21T17:00:20.123Z\",\n    \"direccion\": \"in sed sit laborum\",\n    \"telefono\": \"ea incididunt sunt ullamco\",\n    \"estadoCivil\": \"ea ipsum in\",\n    \"identificacionConyugue\": \"adipisicing eu proident\",\n    \"nombreConyugue\": \"reprehenderit voluptate dolor eu ipsum\",\n    \"esSujetoCredito\": false\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Cliente/Consultar002",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Cliente/Consultar002?identificacion=nisi ea commodo mollit",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Cliente",
+										"Consultar002"
+									],
+									"query": [
+										{
+											"key": "identificacion",
+											"value": "nisi ea commodo mollit"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Cliente/Consultar002?identificacion=nisi ea commodo mollit",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Cliente",
+												"Consultar002"
+											],
+											"query": [
+												{
+													"key": "identificacion",
+													"value": "nisi ea commodo mollit"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Cliente/Registrar203",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"identificacion\": \"veniam magna\",\n  \"nombres\": \"non amet\",\n  \"apellidos\": \"elit ad dolor incididunt\",\n  \"edad\": 99335253,\n  \"fechaNacimiento\": \"2020-04-25T04:28:50.632Z\",\n  \"direccion\": \"nisi \",\n  \"telefono\": \"Excepteur \",\n  \"estadoCivil\": \"occaecat non mollit laborum\",\n  \"identificacionConyugue\": \"adipisicing pariatur\",\n  \"nombreConyugue\": \"ad \",\n  \"esSujetoCredito\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Cliente/Registrar203",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Cliente",
+										"Registrar203"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"identificacion\": \"veniam magna\",\n  \"nombres\": \"non amet\",\n  \"apellidos\": \"elit ad dolor incididunt\",\n  \"edad\": 99335253,\n  \"fechaNacimiento\": \"2020-04-25T04:28:50.632Z\",\n  \"direccion\": \"nisi \",\n  \"telefono\": \"Excepteur \",\n  \"estadoCivil\": \"occaecat non mollit laborum\",\n  \"identificacionConyugue\": \"adipisicing pariatur\",\n  \"nombreConyugue\": \"ad \",\n  \"esSujetoCredito\": false\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Cliente/Registrar203",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Cliente",
+												"Registrar203"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Cliente/Actualizar304/:identificacion",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n    \"operationType\": 4,\n    \"path\": \"ad adipisicing Ut\",\n    \"op\": \"elit eu\",\n    \"from\": \"cillum elit quis\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"voluptate \",\n    \"op\": \"culpa pariatur veniam amet exercitation\",\n    \"from\": \"Lorem et cupidatat\",\n    \"value\": {}\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Cliente/Actualizar304/:identificacion",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Cliente",
+										"Actualizar304",
+										":identificacion"
+									],
+									"variable": [
+										{
+											"key": "identificacion",
+											"value": "nisi ea commodo mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 1,\n    \"path\": \"velit sunt\",\n    \"op\": \"ad in consequat\",\n    \"from\": \"eiusmod est Duis deserunt\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"ut cill\",\n    \"op\": \"culpa ea laborum Duis ut\",\n    \"from\": \"ea qui\",\n    \"value\": {}\n  }\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Cliente/Actualizar304/:identificacion",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Cliente",
+												"Actualizar304",
+												":identificacion"
+											],
+											"variable": [
+												{
+													"key": "identificacion",
+													"value": "nisi ea commodo mollit",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Cliente/Eliminar405/:identificacion",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Cliente/Eliminar405/:identificacion",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Cliente",
+										"Eliminar405",
+										":identificacion"
+									],
+									"variable": [
+										{
+											"key": "identificacion",
+											"value": "nisi ea commodo mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Cliente/Eliminar405/:identificacion",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Cliente",
+												"Eliminar405",
+												":identificacion"
+											],
+											"variable": [
+												{
+													"key": "identificacion",
+													"value": "nisi ea commodo mollit",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Patio",
+					"item": [
+						{
+							"name": "/api/v1/Patio/ConsultarTodos001",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Patio/ConsultarTodos001",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Patio",
+										"ConsultarTodos001"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Patio/ConsultarTodos001",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Patio",
+												"ConsultarTodos001"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"urn:uuid:fc27e834-78e6-4bab-2e1d-e3d8a9e359e2\",\n    \"nombre\": \"qui ut adipisicing\",\n    \"direccion\": \"occaecat nulla et nisi ullamco\",\n    \"telefono\": \"fugiat ullamco ad cupidatat\",\n    \"numeroPuntoVenta\": 19799029\n  },\n  {\n    \"id\": \"urn:uuid:c0fe9e35-a706-0728-5e00-cc8967906b01\",\n    \"nombre\": \"magna ex\",\n    \"direccion\": \"Lorem\",\n    \"telefono\": \"ea adipisicing exercitation esse\",\n    \"numeroPuntoVenta\": -78832348\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Patio/Consultar002",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Patio/Consultar002?numeroPuntoVenta=54436981",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Patio",
+										"Consultar002"
+									],
+									"query": [
+										{
+											"key": "numeroPuntoVenta",
+											"value": "54436981"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Patio/Consultar002?numeroPuntoVenta=54436981",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Patio",
+												"Consultar002"
+											],
+											"query": [
+												{
+													"key": "numeroPuntoVenta",
+													"value": "54436981"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Patio/Registrar203",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"aliquip \",\n  \"direccion\": \"laboris dolor\",\n  \"telefono\": \"esse velit laborum aliquip occaecat\",\n  \"numeroPuntoVenta\": -93814778\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Patio/Registrar203",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Patio",
+										"Registrar203"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nombre\": \"aliquip \",\n  \"direccion\": \"laboris dolor\",\n  \"telefono\": \"esse velit laborum aliquip occaecat\",\n  \"numeroPuntoVenta\": -93814778\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Patio/Registrar203",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Patio",
+												"Registrar203"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Patio/Actualizar304/:numeroPuntoVenta",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n    \"operationType\": 4,\n    \"path\": \"ad adipisicing Ut\",\n    \"op\": \"elit eu\",\n    \"from\": \"cillum elit quis\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"voluptate \",\n    \"op\": \"culpa pariatur veniam amet exercitation\",\n    \"from\": \"Lorem et cupidatat\",\n    \"value\": {}\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Patio/Actualizar304/:numeroPuntoVenta",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Patio",
+										"Actualizar304",
+										":numeroPuntoVenta"
+									],
+									"variable": [
+										{
+											"key": "numeroPuntoVenta",
+											"value": "54436981",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 1,\n    \"path\": \"velit sunt\",\n    \"op\": \"ad in consequat\",\n    \"from\": \"eiusmod est Duis deserunt\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"ut cill\",\n    \"op\": \"culpa ea laborum Duis ut\",\n    \"from\": \"ea qui\",\n    \"value\": {}\n  }\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Patio/Actualizar304/:numeroPuntoVenta",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Patio",
+												"Actualizar304",
+												":numeroPuntoVenta"
+											],
+											"variable": [
+												{
+													"key": "numeroPuntoVenta",
+													"value": "54436981",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Patio/Eliminar405/:numeroPuntoVenta",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Patio/Eliminar405/:numeroPuntoVenta",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Patio",
+										"Eliminar405",
+										":numeroPuntoVenta"
+									],
+									"variable": [
+										{
+											"key": "numeroPuntoVenta",
+											"value": "54436981",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Patio/Eliminar405/:numeroPuntoVenta",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Patio",
+												"Eliminar405",
+												":numeroPuntoVenta"
+											],
+											"variable": [
+												{
+													"key": "numeroPuntoVenta",
+													"value": "54436981",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Vehiculo",
+					"item": [
+						{
+							"name": "/api/v1/Vehiculo/ConsultarTodos001",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "text/plain"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Vehiculo/ConsultarTodos001",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Vehiculo",
+										"ConsultarTodos001"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Vehiculo/ConsultarTodos001",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Vehiculo",
+												"ConsultarTodos001"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"85b799ec-4ecd-135c-02e1-5377b4cc5bf8\",\n    \"placa\": \"velit ut labor\",\n    \"modelo\": \"tempor \",\n    \"numeroChasis\": \"amet id tempor\",\n    \"marcaId\": \"urn:uuid:ef38373e-1943-64cf-9fa4-a4b39fe0bfb3\",\n    \"tipo\": \"veniam ea\",\n    \"cilindraje\": 72031010.02704048,\n    \"avaluo\": -62034560.34689121\n  },\n  {\n    \"id\": \"urn:uuid:10cf2b37-d0d8-7d56-239a-7cf8080ea8e2\",\n    \"placa\": \"elit incididunt\",\n    \"modelo\": \"tempor qui\",\n    \"numeroChasis\": \"elit\",\n    \"marcaId\": \"cfba80fe-eeed-763e-0d6b-bd426544a916\",\n    \"tipo\": \"qui quis sunt nostrud\",\n    \"cilindraje\": -73455458.8543126,\n    \"avaluo\": 87246166.01186019\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Vehiculo/Consultar002",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Vehiculo/Consultar002?placa=nisi ea commodo mollit",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Vehiculo",
+										"Consultar002"
+									],
+									"query": [
+										{
+											"key": "placa",
+											"value": "nisi ea commodo mollit"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Vehiculo/Consultar002?placa=nisi ea commodo mollit",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Vehiculo",
+												"Consultar002"
+											],
+											"query": [
+												{
+													"key": "placa",
+													"value": "nisi ea commodo mollit"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Vehiculo/Registrar203",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"placa\": \"laboris Ut ipsum commodo sit\",\n  \"modelo\": \"fugiat irure\",\n  \"numeroChasis\": \"aliquip esse minim i\",\n  \"marca\": \"dolore ut ad id\",\n  \"tipo\": \"commodo dolore\",\n  \"cilindraje\": 14488320.485762656,\n  \"avaluo\": -59402369.25325344\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Vehiculo/Registrar203",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Vehiculo",
+										"Registrar203"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"placa\": \"laboris Ut ipsum commodo sit\",\n  \"modelo\": \"fugiat irure\",\n  \"numeroChasis\": \"aliquip esse minim i\",\n  \"marca\": \"dolore ut ad id\",\n  \"tipo\": \"commodo dolore\",\n  \"cilindraje\": 14488320.485762656,\n  \"avaluo\": -59402369.25325344\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Vehiculo/Registrar203",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Vehiculo",
+												"Registrar203"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Vehiculo/Actualizar304/:placa",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n    \"operationType\": 4,\n    \"path\": \"ad adipisicing Ut\",\n    \"op\": \"elit eu\",\n    \"from\": \"cillum elit quis\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"voluptate \",\n    \"op\": \"culpa pariatur veniam amet exercitation\",\n    \"from\": \"Lorem et cupidatat\",\n    \"value\": {}\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Vehiculo/Actualizar304/:placa",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Vehiculo",
+										"Actualizar304",
+										":placa"
+									],
+									"variable": [
+										{
+											"key": "placa",
+											"value": "nisi ea commodo mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 1,\n    \"path\": \"velit sunt\",\n    \"op\": \"ad in consequat\",\n    \"from\": \"eiusmod est Duis deserunt\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"ut cill\",\n    \"op\": \"culpa ea laborum Duis ut\",\n    \"from\": \"ea qui\",\n    \"value\": {}\n  }\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Vehiculo/Actualizar304/:placa",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Vehiculo",
+												"Actualizar304",
+												":placa"
+											],
+											"variable": [
+												{
+													"key": "placa",
+													"value": "nisi ea commodo mollit",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/Vehiculo/Eliminar405/:placa",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/Vehiculo/Eliminar405/:placa",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"Vehiculo",
+										"Eliminar405",
+										":placa"
+									],
+									"variable": [
+										{
+											"key": "placa",
+											"value": "nisi ea commodo mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/Vehiculo/Eliminar405/:placa",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"Vehiculo",
+												"Eliminar405",
+												":placa"
+											],
+											"variable": [
+												{
+													"key": "placa",
+													"value": "nisi ea commodo mollit",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:7291",
+			"type": "string"
+		}
+	]
+}

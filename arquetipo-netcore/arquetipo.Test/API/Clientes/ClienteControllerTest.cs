@@ -15,7 +15,7 @@ namespace arquetipo.Test.API
 {
     public class ClienteControllerTest
     {
-        private List<ECliente> _clientesSeed;
+        private readonly List<ECliente> _clientesSeed;
 
         public ClienteControllerTest()
         {

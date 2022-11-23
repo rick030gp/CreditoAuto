@@ -57,5 +57,11 @@ namespace arquetipo.Infrastructure.Exceptions
             Code = "EMC002",
             Message = "La marca de vehículo no existe"
         };
+
+        public static readonly Error AsociacionClientePatioNoExiste = new()
+        {
+            Code = "ECP001",
+            Message = "La asociación entre cliente y patio no existe"
+        };
     }
 }

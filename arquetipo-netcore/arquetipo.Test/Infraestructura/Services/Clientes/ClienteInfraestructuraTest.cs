@@ -250,9 +250,12 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
         //    _clienteRepositorioMock.Setup(cr => cr.ObtenerPorIdentificacionAsync(IDENTIFICACION))
         //        .ReturnsAsync(_clientesSeed.First(c => c.Identificacion == IDENTIFICACION));
 
+        //    _clienteRepositorioMock.Setup(cr => cr.EliminarAsync(
+        //        _clientesSeed.First(c => c.Identificacion == IDENTIFICACION)))
+        //        .Throws(new DbUpdateException("conflicto con la restricción REFERENCE"));
+
         //    var clienteInfraestructura = new ClienteInfraestructura(
-        //        _clienteRepositorioMock.Object,
-        //        _mapper);
+        //        _clienteRepositorioMock.Object);
 
         //    Task act() => clienteInfraestructura.EliminarClienteAsync(IDENTIFICACION);
         //    var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);

@@ -3,6 +3,7 @@ using arquetipo.Entity.DTOs;
 using arquetipo.Entity.Models;
 using arquetipo.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.EntityFrameworkCore;
 
 namespace arquetipo.Infrastructure.Services.Patios
 {
@@ -70,7 +71,7 @@ namespace arquetipo.Infrastructure.Services.Patios
                 await _patioRepositorio.EliminarAsync(patio);
                 return EConstante.PATIO_ELIMINADO;
             }
-            catch (Exception ex)
+            catch (DbUpdateException ex)
             {
                 throw new CrAutoExcepcion(CrAutoErrores.EliminarRelacionesExistentesError, ex);
             }

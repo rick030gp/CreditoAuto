@@ -15,7 +15,7 @@ namespace arquetipo.Test.API.Patios
 {
     public class PatioControllerTest
     {
-        private List<EPatio> _patiosSeed;
+        private readonly List<EPatio> _patiosSeed;
 
         public PatioControllerTest()
         {

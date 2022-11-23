@@ -85,20 +85,27 @@ namespace arquetipo.Repository.Migrations
 
             modelBuilder.Entity("arquetipo.Entity.Models.EClientePatio", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("ClienteId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("PatioId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("FechaAsignacion")
+                    b.Property<DateTime?>("FechaAsignacion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
 
-                    b.HasKey("ClienteId", "PatioId");
+                    b.Property<Guid>("PatioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("PatioId");
+
+                    b.HasIndex("ClienteId", "PatioId")
+                        .IsUnique();
 
                     b.ToTable("ClientePatio", (string)null);
                 });
@@ -167,6 +174,9 @@ namespace arquetipo.Repository.Migrations
                         .HasColumnType("nvarchar(64)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Nombre")
+                        .IsUnique();
 
                     b.ToTable("Marca", (string)null);
                 });

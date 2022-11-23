@@ -86,13 +86,14 @@ namespace arquetipo.Repository.Migrations
                 name: "ClientePatio",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PatioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FechaAsignacion = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()")
+                    FechaAsignacion = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "getdate()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClientePatio", x => new { x.ClienteId, x.PatioId });
+                    table.PrimaryKey("PK_ClientePatio", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ClientePatio_Cliente_ClienteId",
                         column: x => x.ClienteId,
@@ -184,6 +185,12 @@ namespace arquetipo.Repository.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ClientePatio_ClienteId_PatioId",
+                table: "ClientePatio",
+                columns: new[] { "ClienteId", "PatioId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ClientePatio_PatioId",
                 table: "ClientePatio",
                 column: "PatioId");
@@ -198,6 +205,12 @@ namespace arquetipo.Repository.Migrations
                 name: "IX_Ejecutivo_PatioId",
                 table: "Ejecutivo",
                 column: "PatioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Marca_Nombre",
+                table: "Marca",
+                column: "Nombre",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Patio_NumeroPuntoVenta",

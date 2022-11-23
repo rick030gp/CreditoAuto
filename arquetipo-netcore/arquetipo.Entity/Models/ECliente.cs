@@ -25,8 +25,8 @@
             string direccion,
             string telefono,
             string estadoCivil,
-            string identificacionConyugue,
-            string nombreConyugue,
+            string? identificacionConyugue = null,
+            string? nombreConyugue = null,
             bool esSujetoCredito = true)
         {
             Id = id;
