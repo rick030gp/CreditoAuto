@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.JsonPatch;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
@@ -122,7 +121,7 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
                 .ReturnsAsync(cliente);
             _patioRepositorioMock.Setup(pr => pr.ObtenerPorPuntoVentaAsync(NUMERO_PUNTO_VENTA))
                 .ReturnsAsync(patio);
-            _clientePatioRepositorioMock.Setup(cpr => cpr.InsertarAsync(clientePatioObject))
+            _clientePatioRepositorioMock.Setup(cpr => cpr.InsertarAsync(It.IsAny<EClientePatio>()))
                 .ReturnsAsync((EClientePatio cp) => cp);
 
             var clientePatioInfraestructura = new ClientePatioInfraestructura(
@@ -196,7 +195,7 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
         [Fact]
         public async Task Should_ThrowException_AsociacionClientePatioNoExiste_Al_ActualizarAsociacionClientePatio()
         {
-            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorId(Guid.NewGuid()))
+            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorIdAsync(Guid.NewGuid()))
                 .Returns(Task.FromResult<EClientePatio?>(null));
             var clientePatioInfraestructura = new ClientePatioInfraestructura(
                 _clienteRepositorioMock.Object,
@@ -220,9 +219,9 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
             var patio = _patiosSeed.First(p => p.NumeroPuntoVenta == 1);
             EClientePatio CLIENTE_PATIO_ACTUALIZAR = new(Guid.NewGuid(), cliente.Id, patio.Id);
 
-            _clienteRepositorioMock.Setup(cr => cr.ObtenerPorId(Guid.NewGuid()))
+            _clienteRepositorioMock.Setup(cr => cr.ObtenerPorIdAsync(Guid.NewGuid()))
                 .Returns(Task.FromResult<ECliente?>(null));
-            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorId(CLIENTE_PATIO_ACTUALIZAR.Id))
+            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorIdAsync(CLIENTE_PATIO_ACTUALIZAR.Id))
                 .ReturnsAsync(CLIENTE_PATIO_ACTUALIZAR);
 
             var clientePatioInfraestructura = new ClientePatioInfraestructura(
@@ -247,9 +246,9 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
             var patio = _patiosSeed.First(p => p.NumeroPuntoVenta == 1);
             EClientePatio CLIENTE_PATIO_ACTUALIZAR = new(Guid.NewGuid(), cliente.Id, patio.Id);
             
-            _patioRepositorioMock.Setup(pr => pr.ObtenerPorId(Guid.NewGuid()))
+            _patioRepositorioMock.Setup(pr => pr.ObtenerPorIdAsync(Guid.NewGuid()))
                 .Returns(Task.FromResult<EPatio?>(null));
-            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorId(CLIENTE_PATIO_ACTUALIZAR.Id))
+            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorIdAsync(CLIENTE_PATIO_ACTUALIZAR.Id))
                 .ReturnsAsync(CLIENTE_PATIO_ACTUALIZAR);
 
             var clientePatioInfraestructura = new ClientePatioInfraestructura(
@@ -276,12 +275,14 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
             var clienteActualizar = new ECliente(Guid.NewGuid(), "CL05", "NOM05", "AP05", 22, Convert.ToDateTime("12/01/2000"), "D05", "TL05", "SOLTERO");
             var patioActualizar = new EPatio(Guid.NewGuid(), "Patio 5", "D05", "TL05", 5);
 
-            _clienteRepositorioMock.Setup(cr => cr.ObtenerPorId(clienteActualizar.Id))
+            _clienteRepositorioMock.Setup(cr => cr.ObtenerPorIdAsync(clienteActualizar.Id))
                 .ReturnsAsync(clienteActualizar);
-            _patioRepositorioMock.Setup(pr => pr.ObtenerPorId(patioActualizar.Id))
+            _patioRepositorioMock.Setup(pr => pr.ObtenerPorIdAsync(patioActualizar.Id))
                 .ReturnsAsync(patioActualizar);
-            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorId(CLIENTE_PATIO_ACTUALIZAR.Id))
+            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorIdAsync(CLIENTE_PATIO_ACTUALIZAR.Id))
                 .ReturnsAsync(CLIENTE_PATIO_ACTUALIZAR);
+            _clientePatioRepositorioMock.Setup(cpr => cpr.ActualizarAsync(It.IsAny<EClientePatio>()))
+                .ReturnsAsync((EClientePatio cp) => cp);
 
             var clientePatioInfraestructura = new ClientePatioInfraestructura(
                 _clienteRepositorioMock.Object,
@@ -305,15 +306,15 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
             var cliente = _clientesSeed.First(c => c.Identificacion == "CL01");
             var patio = _patiosSeed.First(p => p.NumeroPuntoVenta == 1);
             EClientePatio CLIENTE_PATIO_ACTUALIZAR = new(Guid.NewGuid(), cliente.Id, patio.Id);
-            EClientePatio CLIENTE_PATIO_EXISTENTE = new(Guid.NewGuid(), cliente.Id, patio.Id);
             var clienteActualizar = new ECliente(Guid.NewGuid(), "CL05", "NOM05", "AP05", 22, Convert.ToDateTime("12/01/2000"), "D05", "TL05", "SOLTERO");
             var patioActualizar = new EPatio(Guid.NewGuid(), "Patio 5", "D05", "TL05", 5);
+            EClientePatio CLIENTE_PATIO_EXISTENTE = new(Guid.NewGuid(), clienteActualizar.Id, patioActualizar.Id);
 
-            _clienteRepositorioMock.Setup(cr => cr.ObtenerPorId(clienteActualizar.Id))
+            _clienteRepositorioMock.Setup(cr => cr.ObtenerPorIdAsync(clienteActualizar.Id))
                 .ReturnsAsync(clienteActualizar);
-            _patioRepositorioMock.Setup(pr => pr.ObtenerPorId(patioActualizar.Id))
+            _patioRepositorioMock.Setup(pr => pr.ObtenerPorIdAsync(patioActualizar.Id))
                 .ReturnsAsync(patioActualizar);
-            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorId(CLIENTE_PATIO_ACTUALIZAR.Id))
+            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorIdAsync(CLIENTE_PATIO_ACTUALIZAR.Id))
                 .ReturnsAsync(CLIENTE_PATIO_ACTUALIZAR);
             _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorParametrosAsync(clienteActualizar.Id, patioActualizar.Id))
                 .ReturnsAsync(CLIENTE_PATIO_EXISTENTE);
@@ -339,7 +340,7 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
         [Fact]
         public async Task Should_ThrowException_AsociacionClientePatioNoExiste_Al_EliminarAsociacionClientePatio()
         {
-            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorId(Guid.NewGuid()))
+            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorIdAsync(Guid.NewGuid()))
                 .Returns(Task.FromResult<EClientePatio?>(null));
             var clientePatioInfraestructura = new ClientePatioInfraestructura(
                 _clienteRepositorioMock.Object,
@@ -358,19 +359,21 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
         {
             var cliente = _clientesSeed.First(c => c.Identificacion == "CL01");
             var patio = _patiosSeed.First(p => p.NumeroPuntoVenta == 1);
-            var clientePatioObject = new EClientePatio(
+            var clientePatio = new EClientePatio(
                 Guid.NewGuid(),
                 cliente.Id,
                 patio.Id);
 
-            _clientePatioRepositorioMock.Setup(cpr => cpr.EliminarAsync(clientePatioObject));
+            _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorIdAsync(clientePatio.Id))
+                .ReturnsAsync(clientePatio);
+            _clientePatioRepositorioMock.Setup(cpr => cpr.EliminarAsync(clientePatio));
 
             var clientePatioInfraestructura = new ClientePatioInfraestructura(
                 _clienteRepositorioMock.Object,
                 _patioRepositorioMock.Object,
                 _clientePatioRepositorioMock.Object);
 
-            var resultado = await clientePatioInfraestructura.EliminarAsociacionClientePatioAsync(clientePatioObject.Id);
+            var resultado = await clientePatioInfraestructura.EliminarAsociacionClientePatioAsync(clientePatio.Id);
             
             Assert.Equal(EConstante.CLIENTE_PATIO_ELIMINADO, resultado);
         }

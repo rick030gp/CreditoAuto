@@ -26,7 +26,40 @@ namespace arquetipo.Infrastructure.Services.ClientePatio
 
         public async Task<EClientePatio> ActualizarAsociacionClientePatioAsync(Guid id, JsonPatchDocument<EClientePatio> input)
         {
-            throw new NotImplementedException();
+            if (!input.Operations.Any())
+                throw new CrAutoExcepcion(CrAutoErrores.ActualizacionDatosVaciosError);
+
+            var clientePatio = await _clientePatioRepositorio.ObtenerPorIdAsync(id);
+            if (clientePatio == null)
+                throw new CrAutoExcepcion(CrAutoErrores.AsociacionClientePatioNoExiste);
+
+            var clienteIdAnterior = clientePatio.ClienteId;
+            var patioIdAnterior = clientePatio.PatioId;
+
+            input.ApplyTo(clientePatio);
+
+            if (clientePatio.ClienteId != clienteIdAnterior)
+            {
+                var cliente = await _clienteRepositorio.ObtenerPorIdAsync(clientePatio.ClienteId);
+                if (cliente == null)
+                    throw new CrAutoExcepcion(CrAutoErrores.ClienteNoExisteError);
+            }
+
+            if (clientePatio.PatioId != patioIdAnterior)
+            {
+                var patio = await _patioRepositorio.ObtenerPorIdAsync(clientePatio.PatioId);
+                if (patio == null)
+                    throw new CrAutoExcepcion(CrAutoErrores.PatioNoExisteError);
+            }
+
+            var clientePatioExistente = await _clientePatioRepositorio.ObtenerPorParametrosAsync(
+                clientePatio.ClienteId,
+                clientePatio.PatioId);
+
+            if (clientePatioExistente != null && clientePatioExistente.Id != clientePatio.Id)
+                return clientePatioExistente;
+
+            return await _clientePatioRepositorio.ActualizarAsync(clientePatio);
         }
 
         public async Task<EClientePatio> AsociarClientePatioAsync(EAsociarClientePatioDto input)
@@ -50,7 +83,7 @@ namespace arquetipo.Infrastructure.Services.ClientePatio
 
         public async Task<string> EliminarAsociacionClientePatioAsync(Guid id)
         {
-            var clientePatio = await _clientePatioRepositorio.ObtenerPorId(id);
+            var clientePatio = await _clientePatioRepositorio.ObtenerPorIdAsync(id);
             if (clientePatio == null)
                 throw new CrAutoExcepcion(CrAutoErrores.AsociacionClientePatioNoExiste);
 

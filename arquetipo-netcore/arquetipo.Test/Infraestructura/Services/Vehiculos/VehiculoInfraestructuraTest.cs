@@ -375,7 +375,7 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
 
             _vehiculoRepositorioMock.Setup(vr => vr.ObtenerPorPlacaAsync(PLACA))
                 .ReturnsAsync(_vehiculosSeed.First(v => v.Placa == PLACA));
-            _marcaRepositorioMock.Setup(mr => mr.ObtenerPorId(NUEVA_MARCA))
+            _marcaRepositorioMock.Setup(mr => mr.ObtenerPorIdAsync(NUEVA_MARCA))
                 .Returns(Task.FromResult<EMarca?>(null));
             var VehiculoInfraestructura = new VehiculoInfraestructura(
                 _vehiculoRepositorioMock.Object,

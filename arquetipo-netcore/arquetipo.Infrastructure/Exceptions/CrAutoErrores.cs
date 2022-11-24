@@ -63,5 +63,11 @@ namespace arquetipo.Infrastructure.Exceptions
             Code = "ECP001",
             Message = "La asociación entre cliente y patio no existe"
         };
+
+        public static readonly Error ClienteYaTieneSolicitudError = new()
+        {
+            Code = "ESC001",
+            Message = "El cliente ya tiene una solicitud de crédito registrada"
+        };
     }
 }

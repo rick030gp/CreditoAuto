@@ -31,7 +31,7 @@ namespace arquetipo.Infrastructure.Services.Vehiculos
             if (operacionMarca != null)
             {
                 var marcaId = Guid.Parse(operacionMarca.value.ToString());
-                var marca = await _marcaRepositorio.ObtenerPorId(marcaId);
+                var marca = await _marcaRepositorio.ObtenerPorIdAsync(marcaId);
                 if (marca == null)
                     throw new CrAutoExcepcion(CrAutoErrores.MarcaNoExisteError);
             }
