@@ -22,9 +22,10 @@ namespace arquetipo.Repository.Services.SolicitudCredito
 
         public async Task<ESolicitudCredito?> ObtenerActivaPorClienteFechaAsync(Guid clienteId, DateTime fecha)
         {
-            return await _context.SolicitudesCredito.FirstOrDefaultAsync(
-                sc => sc.ClienteId == clienteId && sc.Estado == EstadoSolicitud.Registrada 
-                && DateTime.Parse(sc.FechaElaboracion.ToString()) == DateTime.Parse(fecha.ToString()));
+            var solicitudesFecha = _context.SolicitudesCredito.AsEnumerable()
+                .Where(sc => sc.Estado == EstadoSolicitud.Registrada && sc.FechaElaboracion.ToString("yyyy-MM-dd") == fecha.ToString("yyyy-MM-dd"));
+
+            return solicitudesFecha.FirstOrDefault(s => s.ClienteId == clienteId);
         }
     }
 }

@@ -63,7 +63,7 @@ namespace arquetipo.Repository.Context
                 ejecutivo.Property(e => e.Direccion).HasMaxLength(EConstante.DIRECCION_MAXLENGTH);
                 ejecutivo.Property(e => e.TelefonoConvencional).HasMaxLength(EConstante.TELEFONO_MAXLENGTH);
                 ejecutivo.Property(e => e.Celular).HasMaxLength(EConstante.TELEFONO_MAXLENGTH);
-                ejecutivo.HasOne<EPatio>().WithMany()
+                ejecutivo.HasOne<EPatio>().WithMany(p => p.Ejecutivos)
                     .HasForeignKey(e => e.PatioId)
                     .OnDelete(DeleteBehavior.Restrict);
             });

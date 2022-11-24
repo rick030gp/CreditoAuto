@@ -1,8 +1,10 @@
 ﻿using arquetipo.Infrastructure.Seeders;
 using arquetipo.Repository.Context;
+using System.Diagnostics.CodeAnalysis;
 
 namespace arquetipo.API
 {
+    [ExcludeFromCodeCoverage]
     internal static class DbInitializerExtension
     {
         public static IApplicationBuilder UseItToSeedSqlServer(this IApplicationBuilder app)

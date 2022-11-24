@@ -69,5 +69,17 @@ namespace arquetipo.Infrastructure.Exceptions
             Code = "ESC001",
             Message = "El cliente ya tiene una solicitud de crédito registrada"
         };
+
+        public static readonly Error EjecutivoNoDisponibleEnPatioError = new()
+        {
+            Code = "ESC002",
+            Message = "El ejecutivo ingresado no pertenece al patio ingresado"
+        };
+
+        public static readonly Error VehiculoEnReservaError = new()
+        {
+            Code = "ESC003",
+            Message = "El vehículo ya se encuentra reservado"
+        };
     }
 }

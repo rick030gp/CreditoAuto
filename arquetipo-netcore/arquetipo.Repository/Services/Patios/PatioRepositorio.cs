@@ -18,5 +18,11 @@ namespace arquetipo.Repository.Services.Patios
         {
             return await _context.Patios.FirstOrDefaultAsync(p => p.NumeroPuntoVenta == numeroPuntoVenta);
         }
+
+        public async Task<EPatio?> ObtenerPorPuntoVentaConEjecutivosAsync(short numeroPuntoVenta)
+        {
+            return await _context.Patios.Include(p => p.Ejecutivos)
+                .FirstOrDefaultAsync(p => p.NumeroPuntoVenta == numeroPuntoVenta);
+        }
     }
 }

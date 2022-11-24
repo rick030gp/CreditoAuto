@@ -4,7 +4,7 @@
     {
         public DateTime FechaElaboracion { get; set; } = DateTime.Now;
         public string IdentificacionCliente { get; set; }
-        public Guid PatioId { get; set; }
+        public short NumeroPuntoVentaPatio { get; set; }
         public string PlacaVehiculo { get; set; }
         public short MesesPlazo { get; set; }
         public decimal Cuotas { get; set; }

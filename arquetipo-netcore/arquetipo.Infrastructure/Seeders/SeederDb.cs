@@ -1,11 +1,12 @@
 ﻿using arquetipo.Entity.Models;
 using arquetipo.Repository.Context;
 using CsvHelper;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace arquetipo.Infrastructure.Seeders
 {
+    [ExcludeFromCodeCoverage]
     public class SeederDb
     {
         public static void Initialize(CrAutoDbContext dbContext)

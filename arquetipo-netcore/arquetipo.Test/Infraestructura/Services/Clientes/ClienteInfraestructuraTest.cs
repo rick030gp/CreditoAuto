@@ -23,8 +23,8 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
         {
             _clientesSeed = new List<ECliente>
             {
-                new ECliente(Guid.NewGuid(), "CL01", "NOM01", "AP01", 22, Convert.ToDateTime("12/01/2000"), "D01", "TL01", "SOLTERO", null, null, true),
-                new ECliente(Guid.NewGuid(), "CL02", "NOM02", "AP02", 20, Convert.ToDateTime("12/01/2002"), "D02", "TL02", "SOLTERO", null, null, false),
+                new ECliente(Guid.NewGuid(), "CL01", "NOM01", "AP01", 22, Convert.ToDateTime("12/01/2000"), "D01", "TL01", "SOLTERO"),
+                new ECliente(Guid.NewGuid(), "CL02", "NOM02", "AP02", 20, Convert.ToDateTime("12/01/2002"), "D02", "TL02", "SOLTERO"),
             };
             _clienteRepositorioMock = new Mock<IClienteRepositorio>();
         }
@@ -62,7 +62,7 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
         public async void Should_ConsultarClientePorIdentificacion_Ok()
         {
             const string IDENTIFICACION = "CL01";
-            var clienteSeed = new ECliente(Guid.NewGuid(), "CL01", "NOM01", "AP01", 22, Convert.ToDateTime("12/01/2000"), "D01", "TL01", "SOLTERO", null, null, true);
+            var clienteSeed = new ECliente(Guid.NewGuid(), "CL01", "NOM01", "AP01", 22, Convert.ToDateTime("12/01/2000"), "D01", "TL01", "SOLTERO");
             _clienteRepositorioMock.Setup(cr => cr.ObtenerPorIdentificacionAsync(IDENTIFICACION))
                 .ReturnsAsync(clienteSeed);
             var clienteInfraestructura = new ClienteInfraestructura(

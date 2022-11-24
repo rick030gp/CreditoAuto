@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4fa40b78-98fa-4492-b0d5-205f34109a59",
+		"_postman_id": "0c881450-cdf8-4c8f-b1dd-292589d4dcbe",
 		"name": "arquetipo.API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4583847"
@@ -64,7 +64,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "[\n  {\n    \"id\": \"urn:uuid:cc07be0f-0587-5707-6c2c-f3d22b9a4e9f\",\n    \"identificacion\": \"commodo\",\n    \"nombres\": \"laboris nostrud cupidatat ut aute\",\n    \"apellidos\": \"dolor deserunt non\",\n    \"edad\": -90926884,\n    \"fechaNacimiento\": \"1970-04-14T01:27:53.626Z\",\n    \"direccion\": \"sint tempor non\",\n    \"telefono\": \"sunt enim ullamco et\",\n    \"estadoCivil\": \"eu\",\n    \"identificacionConyugue\": \"nulla voluptate qui\",\n    \"nombreConyugue\": \"dolore labore\",\n    \"esSujetoCredito\": false\n  },\n  {\n    \"id\": \"d16743c0-6db1-c2fc-0de7-b7c5af5c36b3\",\n    \"identificacion\": \"minim aliqua consequat aute\",\n    \"nombres\": \"in enim consequat\",\n    \"apellidos\": \"elit labore nulla Excepteur\",\n    \"edad\": -29597886,\n    \"fechaNacimiento\": \"1990-07-21T17:00:20.123Z\",\n    \"direccion\": \"in sed sit laborum\",\n    \"telefono\": \"ea incididunt sunt ullamco\",\n    \"estadoCivil\": \"ea ipsum in\",\n    \"identificacionConyugue\": \"adipisicing eu proident\",\n    \"nombreConyugue\": \"reprehenderit voluptate dolor eu ipsum\",\n    \"esSujetoCredito\": false\n  }\n]"
+									"body": "[\n  {\n    \"id\": \"c630cfa5-1b8b-373f-64b3-60607d9bd78c\",\n    \"identificacion\": \"magna ullamco mollit\",\n    \"nombres\": \"velit anim ad in sunt\",\n    \"apellidos\": \"non tempor labor\",\n    \"edad\": -19172587,\n    \"fechaNacimiento\": \"1989-05-14T05:49:13.883Z\",\n    \"direccion\": \"consectetur ipsum labore\",\n    \"telefono\": \"nulla aliquip ex\",\n    \"estadoCivil\": \"anim ad ut\",\n    \"identificacionConyugue\": \"tempor\",\n    \"nombreConyugue\": \"quis irure\",\n    \"esSujetoCredito\": true\n  },\n  {\n    \"id\": \"92abc502-c859-3c5f-e3c1-d71a61238d89\",\n    \"identificacion\": \"est in sit elit quis\",\n    \"nombres\": \"culpa esse ipsum Excepteur\",\n    \"apellidos\": \"do\",\n    \"edad\": 64121337,\n    \"fechaNacimiento\": \"1949-08-10T18:14:56.631Z\",\n    \"direccion\": \"adipisicing sint nulla\",\n    \"telefono\": \"eiusmod Lorem cillum exercitation\",\n    \"estadoCivil\": \"sed ad magna ipsum\",\n    \"identificacionConyugue\": \"aute reprehenderit dolore aliqua\",\n    \"nombreConyugue\": \"dolore veniam\",\n    \"esSujetoCredito\": false\n  }\n]"
 								}
 							]
 						},
@@ -74,7 +74,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/Cliente/Consultar002?identificacion=nisi ea commodo mollit",
+									"raw": "{{baseUrl}}/api/v1/Cliente/Consultar002?identificacion=ut reprehenderit ma",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -87,7 +87,7 @@
 									"query": [
 										{
 											"key": "identificacion",
-											"value": "nisi ea commodo mollit"
+											"value": "ut reprehenderit ma"
 										}
 									]
 								}
@@ -99,7 +99,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/api/v1/Cliente/Consultar002?identificacion=nisi ea commodo mollit",
+											"raw": "{{baseUrl}}/api/v1/Cliente/Consultar002?identificacion=ut reprehenderit ma",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -112,7 +112,7 @@
 											"query": [
 												{
 													"key": "identificacion",
-													"value": "nisi ea commodo mollit"
+													"value": "ut reprehenderit ma"
 												}
 											]
 										}
@@ -143,7 +143,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"identificacion\": \"veniam magna\",\n  \"nombres\": \"non amet\",\n  \"apellidos\": \"elit ad dolor incididunt\",\n  \"edad\": 99335253,\n  \"fechaNacimiento\": \"2020-04-25T04:28:50.632Z\",\n  \"direccion\": \"nisi \",\n  \"telefono\": \"Excepteur \",\n  \"estadoCivil\": \"occaecat non mollit laborum\",\n  \"identificacionConyugue\": \"adipisicing pariatur\",\n  \"nombreConyugue\": \"ad \",\n  \"esSujetoCredito\": false\n}",
+									"raw": "{\n  \"identificacion\": \"cupidatat dolor quis laborum\",\n  \"nombres\": \"nostrud\",\n  \"apellidos\": \"fugiat\",\n  \"edad\": 91253387,\n  \"fechaNacimiento\": \"2013-05-04T14:56:55.934Z\",\n  \"direccion\": \"labore tempor\",\n  \"telefono\": \"eiusmod amet ut est\",\n  \"estadoCivil\": \"exercitation magna anim ullamco pariatur\",\n  \"identificacionConyugue\": \"ut\",\n  \"nombreConyugue\": \"Lorem nisi adipisic\",\n  \"esSujetoCredito\": false\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -171,7 +171,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"identificacion\": \"veniam magna\",\n  \"nombres\": \"non amet\",\n  \"apellidos\": \"elit ad dolor incididunt\",\n  \"edad\": 99335253,\n  \"fechaNacimiento\": \"2020-04-25T04:28:50.632Z\",\n  \"direccion\": \"nisi \",\n  \"telefono\": \"Excepteur \",\n  \"estadoCivil\": \"occaecat non mollit laborum\",\n  \"identificacionConyugue\": \"adipisicing pariatur\",\n  \"nombreConyugue\": \"ad \",\n  \"esSujetoCredito\": false\n}",
+											"raw": "{\n  \"identificacion\": \"cupidatat dolor quis laborum\",\n  \"nombres\": \"nostrud\",\n  \"apellidos\": \"fugiat\",\n  \"edad\": 91253387,\n  \"fechaNacimiento\": \"2013-05-04T14:56:55.934Z\",\n  \"direccion\": \"labore tempor\",\n  \"telefono\": \"eiusmod amet ut est\",\n  \"estadoCivil\": \"exercitation magna anim ullamco pariatur\",\n  \"identificacionConyugue\": \"ut\",\n  \"nombreConyugue\": \"Lorem nisi adipisic\",\n  \"esSujetoCredito\": false\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -217,7 +217,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n    \"operationType\": 4,\n    \"path\": \"ad adipisicing Ut\",\n    \"op\": \"elit eu\",\n    \"from\": \"cillum elit quis\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"voluptate \",\n    \"op\": \"culpa pariatur veniam amet exercitation\",\n    \"from\": \"Lorem et cupidatat\",\n    \"value\": {}\n  }\n]",
+									"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"incididunt cillu\",\n    \"op\": \"eu aliquip\",\n    \"from\": \"qui ipsum deserunt ex in\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"non\",\n    \"op\": \"est esse magna deserunt\",\n    \"from\": \"fugiat ut esse est\",\n    \"value\": {}\n  }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -239,7 +239,7 @@
 									"variable": [
 										{
 											"key": "identificacion",
-											"value": "nisi ea commodo mollit",
+											"value": "ut reprehenderit ma",
 											"description": "(Required) "
 										}
 									]
@@ -253,7 +253,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "[\n  {\n    \"operationType\": 1,\n    \"path\": \"velit sunt\",\n    \"op\": \"ad in consequat\",\n    \"from\": \"eiusmod est Duis deserunt\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"ut cill\",\n    \"op\": \"culpa ea laborum Duis ut\",\n    \"from\": \"ea qui\",\n    \"value\": {}\n  }\n]",
+											"raw": "[\n  {\n    \"operationType\": 0,\n    \"path\": \"occaecat ad irure incididunt\",\n    \"op\": \"in sit aliquip nostrud\",\n    \"from\": \"veniam voluptate\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"esse laborum\",\n    \"op\": \"ad\",\n    \"from\": \"Excepteur\",\n    \"value\": {}\n  }\n]",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -275,7 +275,7 @@
 											"variable": [
 												{
 													"key": "identificacion",
-													"value": "nisi ea commodo mollit",
+													"value": "ut reprehenderit ma",
 													"description": "(Required) "
 												}
 											]
@@ -315,7 +315,7 @@
 									"variable": [
 										{
 											"key": "identificacion",
-											"value": "nisi ea commodo mollit",
+											"value": "ut reprehenderit ma",
 											"description": "(Required) "
 										}
 									]
@@ -342,7 +342,243 @@
 											"variable": [
 												{
 													"key": "identificacion",
-													"value": "nisi ea commodo mollit",
+													"value": "ut reprehenderit ma",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Cliente Patio",
+					"item": [
+						{
+							"name": "/api/v1/ClientePatio/Registrar201",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"identificacionCliente\": \"minim sed fugiat in sin\",\n  \"numeroPuntoVenta\": 39202836,\n  \"fechaAsignacion\": \"1963-01-13T09:31:28.549Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/ClientePatio/Registrar201",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"ClientePatio",
+										"Registrar201"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"identificacionCliente\": \"minim sed fugiat in sin\",\n  \"numeroPuntoVenta\": 39202836,\n  \"fechaAsignacion\": \"1963-01-13T09:31:28.549Z\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/ClientePatio/Registrar201",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"ClientePatio",
+												"Registrar201"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/ClientePatio/Actualizar302/:id",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"incididunt cillu\",\n    \"op\": \"eu aliquip\",\n    \"from\": \"qui ipsum deserunt ex in\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"non\",\n    \"op\": \"est esse magna deserunt\",\n    \"from\": \"fugiat ut esse est\",\n    \"value\": {}\n  }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/ClientePatio/Actualizar302/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"ClientePatio",
+										"Actualizar302",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "urn:uuid:9a406aae-bc41-9857-a3f8-9badca3bd4cb",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"operationType\": 0,\n    \"path\": \"occaecat ad irure incididunt\",\n    \"op\": \"in sit aliquip nostrud\",\n    \"from\": \"veniam voluptate\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"esse laborum\",\n    \"op\": \"ad\",\n    \"from\": \"Excepteur\",\n    \"value\": {}\n  }\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/ClientePatio/Actualizar302/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"ClientePatio",
+												"Actualizar302",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "urn:uuid:9a406aae-bc41-9857-a3f8-9badca3bd4cb",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/ClientePatio/Eliminar403/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/ClientePatio/Eliminar403/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"ClientePatio",
+										"Eliminar403",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "urn:uuid:9a406aae-bc41-9857-a3f8-9badca3bd4cb",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/ClientePatio/Eliminar403/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"ClientePatio",
+												"Eliminar403",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "urn:uuid:9a406aae-bc41-9857-a3f8-9badca3bd4cb",
 													"description": "(Required) "
 												}
 											]
@@ -419,7 +655,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "[\n  {\n    \"id\": \"urn:uuid:fc27e834-78e6-4bab-2e1d-e3d8a9e359e2\",\n    \"nombre\": \"qui ut adipisicing\",\n    \"direccion\": \"occaecat nulla et nisi ullamco\",\n    \"telefono\": \"fugiat ullamco ad cupidatat\",\n    \"numeroPuntoVenta\": 19799029\n  },\n  {\n    \"id\": \"urn:uuid:c0fe9e35-a706-0728-5e00-cc8967906b01\",\n    \"nombre\": \"magna ex\",\n    \"direccion\": \"Lorem\",\n    \"telefono\": \"ea adipisicing exercitation esse\",\n    \"numeroPuntoVenta\": -78832348\n  }\n]"
+									"body": "[\n  {\n    \"id\": \"8c72a2e6-f4c9-a4ad-b16b-4077ca5878ba\",\n    \"nombre\": \"do in reprehenderit cillum ea\",\n    \"direccion\": \"Excepteur ipsum velit\",\n    \"telefono\": \"ad magna\",\n    \"numeroPuntoVenta\": 15734270,\n    \"ejecutivos\": [\n      {\n        \"id\": \"c331e2da-c41b-a680-5c50-1e3d57a27f19\",\n        \"identificacion\": \"Excepteur quis\",\n        \"nombres\": \"Lorem laborum eiusmod\",\n        \"apellidos\": \"consequat do anim\",\n        \"direccion\": \"Duis esse ipsum\",\n        \"telefonoConvencional\": \"in ea ullamc\",\n        \"celular\": \"in anim dolore est ea\",\n        \"patioId\": \"eb4d8b41-9b0f-c684-7545-7ced2e1490ca\",\n        \"edad\": -54545585\n      },\n      {\n        \"id\": \"efe184ba-fb26-d99d-d602-260e5e38d5db\",\n        \"identificacion\": \"esse laborum\",\n        \"nombres\": \"Ut\",\n        \"apellidos\": \"Duis ad cillum\",\n        \"direccion\": \"officia aliqua sunt exercitation\",\n        \"telefonoConvencional\": \"quis ut magna labore\",\n        \"celular\": \"eiusmod veniam elit in quis\",\n        \"patioId\": \"urn:uuid:77205e8f-1306-685b-b48a-1af556f62b28\",\n        \"edad\": 6170660\n      }\n    ]\n  },\n  {\n    \"id\": \"0eb2e61f-707e-7b67-711c-9784785a4dd9\",\n    \"nombre\": \"adipisicing eu id\",\n    \"direccion\": \"labore ut\",\n    \"telefono\": \"est sin\",\n    \"numeroPuntoVenta\": -41450466,\n    \"ejecutivos\": [\n      {\n        \"id\": \"b7cf3332-4288-d1ca-6185-3f56ab83ceb5\",\n        \"identificacion\": \"eu sed commodo\",\n        \"nombres\": \"consequat ex est dolore velit\",\n        \"apellidos\": \"adipisicing mi\",\n        \"direccion\": \"Ut\",\n        \"telefonoConvencional\": \"occaecat\",\n        \"celular\": \"culpa ut velit\",\n        \"patioId\": \"c7c2483d-67fb-cd6c-e9df-4c4d2f8391fc\",\n        \"edad\": -59835892\n      },\n      {\n        \"id\": \"urn:uuid:da6eff8f-ab34-f991-35a6-327455d7f607\",\n        \"identificacion\": \"do eiusmod qui\",\n        \"nombres\": \"velit et nisi\",\n        \"apellidos\": \"exercitation id non sint\",\n        \"direccion\": \"mollit\",\n        \"telefonoConvencional\": \"labore occaecat proident consequat in\",\n        \"celular\": \"in\",\n        \"patioId\": \"5adcc987-7862-ec36-c9a4-d6d72d5a03a0\",\n        \"edad\": -64998867\n      }\n    ]\n  }\n]"
 								}
 							]
 						},
@@ -429,7 +665,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/Patio/Consultar002?numeroPuntoVenta=54436981",
+									"raw": "{{baseUrl}}/api/v1/Patio/Consultar002?numeroPuntoVenta=81591038",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -442,7 +678,7 @@
 									"query": [
 										{
 											"key": "numeroPuntoVenta",
-											"value": "54436981"
+											"value": "81591038"
 										}
 									]
 								}
@@ -454,7 +690,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/api/v1/Patio/Consultar002?numeroPuntoVenta=54436981",
+											"raw": "{{baseUrl}}/api/v1/Patio/Consultar002?numeroPuntoVenta=81591038",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -467,7 +703,7 @@
 											"query": [
 												{
 													"key": "numeroPuntoVenta",
-													"value": "54436981"
+													"value": "81591038"
 												}
 											]
 										}
@@ -498,7 +734,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"nombre\": \"aliquip \",\n  \"direccion\": \"laboris dolor\",\n  \"telefono\": \"esse velit laborum aliquip occaecat\",\n  \"numeroPuntoVenta\": -93814778\n}",
+									"raw": "{\n  \"nombre\": \"aute ut ut\",\n  \"direccion\": \"adipisicing deserunt\",\n  \"telefono\": \"culpa aliquip commodo cillum non\",\n  \"numeroPuntoVenta\": 73867326\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -526,7 +762,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"nombre\": \"aliquip \",\n  \"direccion\": \"laboris dolor\",\n  \"telefono\": \"esse velit laborum aliquip occaecat\",\n  \"numeroPuntoVenta\": -93814778\n}",
+											"raw": "{\n  \"nombre\": \"aute ut ut\",\n  \"direccion\": \"adipisicing deserunt\",\n  \"telefono\": \"culpa aliquip commodo cillum non\",\n  \"numeroPuntoVenta\": 73867326\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -572,7 +808,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n    \"operationType\": 4,\n    \"path\": \"ad adipisicing Ut\",\n    \"op\": \"elit eu\",\n    \"from\": \"cillum elit quis\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"voluptate \",\n    \"op\": \"culpa pariatur veniam amet exercitation\",\n    \"from\": \"Lorem et cupidatat\",\n    \"value\": {}\n  }\n]",
+									"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"incididunt cillu\",\n    \"op\": \"eu aliquip\",\n    \"from\": \"qui ipsum deserunt ex in\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"non\",\n    \"op\": \"est esse magna deserunt\",\n    \"from\": \"fugiat ut esse est\",\n    \"value\": {}\n  }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -594,7 +830,7 @@
 									"variable": [
 										{
 											"key": "numeroPuntoVenta",
-											"value": "54436981",
+											"value": "81591038",
 											"description": "(Required) "
 										}
 									]
@@ -608,7 +844,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "[\n  {\n    \"operationType\": 1,\n    \"path\": \"velit sunt\",\n    \"op\": \"ad in consequat\",\n    \"from\": \"eiusmod est Duis deserunt\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"ut cill\",\n    \"op\": \"culpa ea laborum Duis ut\",\n    \"from\": \"ea qui\",\n    \"value\": {}\n  }\n]",
+											"raw": "[\n  {\n    \"operationType\": 0,\n    \"path\": \"occaecat ad irure incididunt\",\n    \"op\": \"in sit aliquip nostrud\",\n    \"from\": \"veniam voluptate\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"esse laborum\",\n    \"op\": \"ad\",\n    \"from\": \"Excepteur\",\n    \"value\": {}\n  }\n]",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -630,7 +866,7 @@
 											"variable": [
 												{
 													"key": "numeroPuntoVenta",
-													"value": "54436981",
+													"value": "81591038",
 													"description": "(Required) "
 												}
 											]
@@ -670,7 +906,7 @@
 									"variable": [
 										{
 											"key": "numeroPuntoVenta",
-											"value": "54436981",
+											"value": "81591038",
 											"description": "(Required) "
 										}
 									]
@@ -697,7 +933,7 @@
 											"variable": [
 												{
 													"key": "numeroPuntoVenta",
-													"value": "54436981",
+													"value": "81591038",
 													"description": "(Required) "
 												}
 											]
@@ -774,7 +1010,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "[\n  {\n    \"id\": \"85b799ec-4ecd-135c-02e1-5377b4cc5bf8\",\n    \"placa\": \"velit ut labor\",\n    \"modelo\": \"tempor \",\n    \"numeroChasis\": \"amet id tempor\",\n    \"marcaId\": \"urn:uuid:ef38373e-1943-64cf-9fa4-a4b39fe0bfb3\",\n    \"tipo\": \"veniam ea\",\n    \"cilindraje\": 72031010.02704048,\n    \"avaluo\": -62034560.34689121\n  },\n  {\n    \"id\": \"urn:uuid:10cf2b37-d0d8-7d56-239a-7cf8080ea8e2\",\n    \"placa\": \"elit incididunt\",\n    \"modelo\": \"tempor qui\",\n    \"numeroChasis\": \"elit\",\n    \"marcaId\": \"cfba80fe-eeed-763e-0d6b-bd426544a916\",\n    \"tipo\": \"qui quis sunt nostrud\",\n    \"cilindraje\": -73455458.8543126,\n    \"avaluo\": 87246166.01186019\n  }\n]"
+									"body": "[\n  {\n    \"id\": \"urn:uuid:ce7bb68d-0f18-90c7-0019-02ff18781a2f\",\n    \"placa\": \"sunt minim\",\n    \"modelo\": \"eiusmod dolor occaecat incididunt \",\n    \"numeroChasis\": \"commodo nulla ea\",\n    \"marcaId\": \"urn:uuid:f714f9db-2b38-e513-af37-c238abd3e14e\",\n    \"tipo\": \"fugiat minim\",\n    \"cilindraje\": 25205653.193215832,\n    \"avaluo\": -3902711.977927804\n  },\n  {\n    \"id\": \"urn:uuid:024ca0e1-ba96-82f9-9bb2-5c793eda55ac\",\n    \"placa\": \"elit consectetur ex sunt pariatur\",\n    \"modelo\": \"esse ut eu\",\n    \"numeroChasis\": \"ea est commodo\",\n    \"marcaId\": \"f7b9ecc0-9c64-54c2-4aab-354cfe3e2ec8\",\n    \"tipo\": \"exercitation deserunt esse\",\n    \"cilindraje\": -24927060.512715384,\n    \"avaluo\": -65686919.74964307\n  }\n]"
 								}
 							]
 						},
@@ -784,7 +1020,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/Vehiculo/Consultar002?placa=nisi ea commodo mollit",
+									"raw": "{{baseUrl}}/api/v1/Vehiculo/Consultar002?placa=ut reprehenderit ma",
 									"host": [
 										"{{baseUrl}}"
 									],
@@ -797,7 +1033,7 @@
 									"query": [
 										{
 											"key": "placa",
-											"value": "nisi ea commodo mollit"
+											"value": "ut reprehenderit ma"
 										}
 									]
 								}
@@ -809,7 +1045,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/api/v1/Vehiculo/Consultar002?placa=nisi ea commodo mollit",
+											"raw": "{{baseUrl}}/api/v1/Vehiculo/Consultar002?placa=ut reprehenderit ma",
 											"host": [
 												"{{baseUrl}}"
 											],
@@ -822,7 +1058,7 @@
 											"query": [
 												{
 													"key": "placa",
-													"value": "nisi ea commodo mollit"
+													"value": "ut reprehenderit ma"
 												}
 											]
 										}
@@ -853,7 +1089,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"placa\": \"laboris Ut ipsum commodo sit\",\n  \"modelo\": \"fugiat irure\",\n  \"numeroChasis\": \"aliquip esse minim i\",\n  \"marca\": \"dolore ut ad id\",\n  \"tipo\": \"commodo dolore\",\n  \"cilindraje\": 14488320.485762656,\n  \"avaluo\": -59402369.25325344\n}",
+									"raw": "{\n  \"placa\": \"nulla\",\n  \"modelo\": \"culpa velit minim eu\",\n  \"numeroChasis\": \"velit voluptate sint culpa\",\n  \"marca\": \"laboris incididunt occaecat\",\n  \"tipo\": \"in labore sed nostrud dolore\",\n  \"cilindraje\": -75028208.9106622,\n  \"avaluo\": -62171690.21320888\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -881,7 +1117,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n  \"placa\": \"laboris Ut ipsum commodo sit\",\n  \"modelo\": \"fugiat irure\",\n  \"numeroChasis\": \"aliquip esse minim i\",\n  \"marca\": \"dolore ut ad id\",\n  \"tipo\": \"commodo dolore\",\n  \"cilindraje\": 14488320.485762656,\n  \"avaluo\": -59402369.25325344\n}",
+											"raw": "{\n  \"placa\": \"nulla\",\n  \"modelo\": \"culpa velit minim eu\",\n  \"numeroChasis\": \"velit voluptate sint culpa\",\n  \"marca\": \"laboris incididunt occaecat\",\n  \"tipo\": \"in labore sed nostrud dolore\",\n  \"cilindraje\": -75028208.9106622,\n  \"avaluo\": -62171690.21320888\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -927,7 +1163,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n  {\n    \"operationType\": 4,\n    \"path\": \"ad adipisicing Ut\",\n    \"op\": \"elit eu\",\n    \"from\": \"cillum elit quis\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"voluptate \",\n    \"op\": \"culpa pariatur veniam amet exercitation\",\n    \"from\": \"Lorem et cupidatat\",\n    \"value\": {}\n  }\n]",
+									"raw": "[\n  {\n    \"operationType\": 3,\n    \"path\": \"incididunt cillu\",\n    \"op\": \"eu aliquip\",\n    \"from\": \"qui ipsum deserunt ex in\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"non\",\n    \"op\": \"est esse magna deserunt\",\n    \"from\": \"fugiat ut esse est\",\n    \"value\": {}\n  }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -949,7 +1185,7 @@
 									"variable": [
 										{
 											"key": "placa",
-											"value": "nisi ea commodo mollit",
+											"value": "ut reprehenderit ma",
 											"description": "(Required) "
 										}
 									]
@@ -963,7 +1199,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "[\n  {\n    \"operationType\": 1,\n    \"path\": \"velit sunt\",\n    \"op\": \"ad in consequat\",\n    \"from\": \"eiusmod est Duis deserunt\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 4,\n    \"path\": \"ut cill\",\n    \"op\": \"culpa ea laborum Duis ut\",\n    \"from\": \"ea qui\",\n    \"value\": {}\n  }\n]",
+											"raw": "[\n  {\n    \"operationType\": 0,\n    \"path\": \"occaecat ad irure incididunt\",\n    \"op\": \"in sit aliquip nostrud\",\n    \"from\": \"veniam voluptate\",\n    \"value\": {}\n  },\n  {\n    \"operationType\": 1,\n    \"path\": \"esse laborum\",\n    \"op\": \"ad\",\n    \"from\": \"Excepteur\",\n    \"value\": {}\n  }\n]",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -985,7 +1221,7 @@
 											"variable": [
 												{
 													"key": "placa",
-													"value": "nisi ea commodo mollit",
+													"value": "ut reprehenderit ma",
 													"description": "(Required) "
 												}
 											]
@@ -1025,7 +1261,7 @@
 									"variable": [
 										{
 											"key": "placa",
-											"value": "nisi ea commodo mollit",
+											"value": "ut reprehenderit ma",
 											"description": "(Required) "
 										}
 									]
@@ -1052,7 +1288,7 @@
 											"variable": [
 												{
 													"key": "placa",
-													"value": "nisi ea commodo mollit",
+													"value": "ut reprehenderit ma",
 													"description": "(Required) "
 												}
 											]
@@ -1071,6 +1307,80 @@
 									"body": ""
 								}
 							]
+						}
+					]
+				},
+				{
+					"name": "/api/v1/SolicitudCredito/Registrar201",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fechaElaboracion\": \"1968-08-27T10:51:34.873Z\",\n  \"identificacionCliente\": \"laborum velit ipsum\",\n  \"numeroPuntoVentaPatio\": -81027347,\n  \"placaVehiculo\": \"Ut eiusmod\",\n  \"mesesPlazo\": 17974805,\n  \"cuotas\": 33643492.008820355,\n  \"entrada\": 90995797.90232885,\n  \"ejecutivoId\": \"urn:uuid:dcaea6e2-13c6-d724-e7bf-823db5f04082\",\n  \"observacion\": \"officia Ut Excepteur\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/SolicitudCredito/Registrar201",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"SolicitudCredito",
+								"Registrar201"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fechaElaboracion\": \"1968-08-27T10:51:34.873Z\",\n  \"identificacionCliente\": \"laborum velit ipsum\",\n  \"numeroPuntoVentaPatio\": -81027347,\n  \"placaVehiculo\": \"Ut eiusmod\",\n  \"mesesPlazo\": 17974805,\n  \"cuotas\": 33643492.008820355,\n  \"entrada\": 90995797.90232885,\n  \"ejecutivoId\": \"urn:uuid:dcaea6e2-13c6-d724-e7bf-823db5f04082\",\n  \"observacion\": \"officia Ut Excepteur\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/SolicitudCredito/Registrar201",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"SolicitudCredito",
+										"Registrar201"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
 						}
 					]
 				}
