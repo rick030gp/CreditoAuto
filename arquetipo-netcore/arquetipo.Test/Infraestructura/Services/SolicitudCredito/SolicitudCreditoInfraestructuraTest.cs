@@ -7,13 +7,6 @@ using arquetipo.Entity.DTOs;
 using arquetipo.Entity.Models;
 using arquetipo.Infrastructure.Exceptions;
 using arquetipo.Infrastructure.Services.SolicitudCredito;
-using CsvHelper;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace arquetipo.Test.Infraestructura.Services.SolicitudCredito
 {
@@ -93,8 +86,8 @@ namespace arquetipo.Test.Infraestructura.Services.SolicitudCredito
         }
 
         #region CrearSolicitudCreditoAsync
-        [Fact]
-        public async Task Should_ThrowException_ClienteNoExisteError_Al_CrearSolicitudCredito()
+        [Test]
+        public void Should_ThrowException_ClienteNoExisteError_Al_CrearSolicitudCredito()
         {
             const string IDENTIFICACION = "CL100";
             const string PLACA_VEHICULO = "ABC01";
@@ -122,13 +115,13 @@ namespace arquetipo.Test.Infraestructura.Services.SolicitudCredito
                 _clientePatioInfraestructuraMock.Object);
 
             Task act() => solicitudCreditoInfraestructura.CrearSolicitudCreditoAsync(input);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.Equal(CrAutoErrores.ClienteNoExisteError.Code, exception.Code);
+            Assert.That(exception.Code, Is.EqualTo(CrAutoErrores.ClienteNoExisteError.Code));
         }
 
-        [Fact]
-        public async Task Should_ThrowException_ClienteYaTieneSolicitudError_Al_CrearSolicitudCredito()
+        [Test]
+        public void Should_ThrowException_ClienteYaTieneSolicitudError_Al_CrearSolicitudCredito()
         {
             const string IDENTIFICACION = "CL01";
             const string PLACA_VEHICULO = "ABC01";
@@ -160,13 +153,13 @@ namespace arquetipo.Test.Infraestructura.Services.SolicitudCredito
                 _clientePatioInfraestructuraMock.Object);
 
             Task act() => solicitudCreditoInfraestructura.CrearSolicitudCreditoAsync(input);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.Equal(CrAutoErrores.ClienteYaTieneSolicitudError.Code, exception.Code);
+            Assert.That(exception.Code, Is.EqualTo(CrAutoErrores.ClienteYaTieneSolicitudError.Code));
         }
 
-        [Fact]
-        public async Task Should_ThrowException_PatioNoExisteError_Al_CrearSolicitudCredito()
+        [Test]
+        public void Should_ThrowException_PatioNoExisteError_Al_CrearSolicitudCredito()
         {
             const string IDENTIFICACION = "CL01";
             const string PLACA_VEHICULO = "ABC01";
@@ -199,13 +192,13 @@ namespace arquetipo.Test.Infraestructura.Services.SolicitudCredito
                 _clientePatioInfraestructuraMock.Object);
 
             Task act() => solicitudCreditoInfraestructura.CrearSolicitudCreditoAsync(input);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.Equal(CrAutoErrores.PatioNoExisteError.Code, exception.Code);
+            Assert.That(exception.Code, Is.EqualTo(CrAutoErrores.PatioNoExisteError.Code));
         }
 
-        [Fact]
-        public async Task Should_ThrowException_EjecutivoNoDisponibleEnPatioError_Al_CrearSolicitudCredito()
+        [Test]
+        public void Should_ThrowException_EjecutivoNoDisponibleEnPatioError_Al_CrearSolicitudCredito()
         {
             const string IDENTIFICACION = "CL01";
             const string PLACA_VEHICULO = "ABC01";
@@ -238,13 +231,13 @@ namespace arquetipo.Test.Infraestructura.Services.SolicitudCredito
                 _clientePatioInfraestructuraMock.Object);
 
             Task act() => solicitudCreditoInfraestructura.CrearSolicitudCreditoAsync(input);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.Equal(CrAutoErrores.EjecutivoNoDisponibleEnPatioError.Code, exception.Code);
+            Assert.That(exception.Code, Is.EqualTo(CrAutoErrores.EjecutivoNoDisponibleEnPatioError.Code));
         }
 
-        [Fact]
-        public async Task Should_ThrowException_VehiculoNoExisteError_Al_CrearSolicitudCredito()
+        [Test]
+        public void Should_ThrowException_VehiculoNoExisteError_Al_CrearSolicitudCredito()
         {
             const string IDENTIFICACION = "CL01";
             const string PLACA_VEHICULO = "ABC101";
@@ -295,13 +288,13 @@ namespace arquetipo.Test.Infraestructura.Services.SolicitudCredito
                 _clientePatioInfraestructuraMock.Object);
 
             Task act() => solicitudCreditoInfraestructura.CrearSolicitudCreditoAsync(input);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.Equal(CrAutoErrores.VehiculoNoExisteError.Code, exception.Code);
+            Assert.That(exception.Code, Is.EqualTo(CrAutoErrores.VehiculoNoExisteError.Code));
         }
 
-        [Fact]
-        public async Task Should_ThrowException_VehiculoEnReservaError_Al_CrearSolicitudCredito()
+        [Test]
+        public void Should_ThrowException_VehiculoEnReservaError_Al_CrearSolicitudCredito()
         {
             const string IDENTIFICACION = "CL01";
             const string PLACA_VEHICULO = "ABC01";
@@ -355,12 +348,12 @@ namespace arquetipo.Test.Infraestructura.Services.SolicitudCredito
                 _clientePatioInfraestructuraMock.Object);
 
             Task act() => solicitudCreditoInfraestructura.CrearSolicitudCreditoAsync(input);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.Equal(CrAutoErrores.VehiculoEnReservaError.Code, exception.Code);
+            Assert.That(exception.Code, Is.EqualTo(CrAutoErrores.VehiculoEnReservaError.Code));
         }
 
-        [Fact]
+        [Test]
         public async Task Should_CrearSolicitudCredito_Ok()
         {
             const string IDENTIFICACION = "CL01";
@@ -418,9 +411,12 @@ namespace arquetipo.Test.Infraestructura.Services.SolicitudCredito
 
             var resultado = await solicitudCreditoInfraestructura.CrearSolicitudCreditoAsync(input);
             
-            Assert.Equal(cliente.Id, resultado.ClienteId);
-            Assert.Equal(vehiculo.Id, resultado.VehiculoId);
-            Assert.Equal(EstadoSolicitud.Registrada, resultado.Estado);
+            Assert.Multiple(() =>
+            {
+                Assert.That(resultado.ClienteId, Is.EqualTo(cliente.Id));
+                Assert.That(resultado.VehiculoId, Is.EqualTo(vehiculo.Id));
+                Assert.That(resultado.Estado, Is.EqualTo(EstadoSolicitud.Registrada));
+            });
         }
         #endregion
     }

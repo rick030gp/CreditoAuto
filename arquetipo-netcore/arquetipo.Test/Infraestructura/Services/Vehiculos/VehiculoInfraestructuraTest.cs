@@ -5,12 +5,6 @@ using arquetipo.Infrastructure;
 using arquetipo.Infrastructure.Exceptions;
 using arquetipo.Infrastructure.Services.Vehiculos;
 using Microsoft.AspNetCore.JsonPatch;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace arquetipo.Test.Infraestructura.Services.Vehiculos
 {
@@ -56,8 +50,8 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
 
 
         #region ConsultarVehiculosAsync
-        [Fact]
-        public async void Should_ConsultarVehiculos_Ok()
+        [Test]
+        public async Task Should_ConsultarVehiculos_Ok()
         {
             _vehiculoRepositorioMock.Setup(vr => vr.ObtenerTodoAsync())
                 .ReturnsAsync(_vehiculosSeed);
@@ -67,11 +61,11 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
 
             var vehiculos = await vehiculoInfraestructura.ConsultarVehiculosAsync();
 
-            Assert.Equal(2, vehiculos.Count());
+            Assert.That(vehiculos.Count(), Is.EqualTo(2));
         }
 
-        [Fact]
-        public async void Should_Consultarvehiculos_ResultadoVacio_Ok()
+        [Test]
+        public async Task Should_Consultarvehiculos_ResultadoVacio_Ok()
         {
             _vehiculoRepositorioMock.Setup(vr => vr.ObtenerTodoAsync())
                 .ReturnsAsync(new List<EVehiculo>());
@@ -81,13 +75,13 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
 
             var vehiculos = await VehiculoInfraestructura.ConsultarVehiculosAsync();
 
-            Assert.Empty(vehiculos);
+            Assert.That(vehiculos, Is.Empty);
         }
         #endregion
 
         #region ConsultarVehiculoPorPlacaAsync
-        [Fact]
-        public async void Should_ConsultarVehiculoPorPlaca_Ok()
+        [Test]
+        public async Task Should_ConsultarVehiculoPorPlaca_Ok()
         {
             const string PLACA = "ABC01";
             var vehiculoSeed = new EVehiculo(
@@ -107,11 +101,11 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
 
             var vehiculo = await VehiculoInfraestructura.ConsultarVehiculoPorPlacaAsync(PLACA);
 
-            Assert.Equal(PLACA, vehiculo.Placa);
+            Assert.That(vehiculo.Placa, Is.EqualTo(PLACA));
         }
 
-        [Fact]
-        public async void Should_ThrowException_VehiculoNoExiste_Al_ConsultarVehiculoPorPlaca()
+        [Test]
+        public void Should_ThrowException_VehiculoNoExiste_Al_ConsultarVehiculoPorPlaca()
         {
             const string PLACA = "PLAAA";
             _vehiculoRepositorioMock.Setup(vr => vr.ObtenerPorPlacaAsync(PLACA))
@@ -121,16 +115,19 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
                 _marcaRepositorioMock.Object);
 
             Task act() => VehiculoInfraestructura.ConsultarVehiculoPorPlacaAsync(PLACA);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
-
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.VehiculoNoExisteError.Code);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.VehiculoNoExisteError.Code, Is.EqualTo(exception.Code));
+            });
         }
         #endregion
 
         #region ConsultarVehiculosPorParametrosAsync
-        [Fact]
-        public async void Should_ConsultarVehiculo_PorModelo_Ok()
+        [Test]
+        public async Task Should_ConsultarVehiculo_PorModelo_Ok()
         {
             const string MODELO = "Sail";
             _vehiculoRepositorioMock.Setup(vr => vr.ObtenerPorParametrosAsync(null, MODELO))
@@ -141,11 +138,11 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
 
             var vehiculos = await VehiculoInfraestructura.ConsultarVehiculosPorParametrosAsync(null, MODELO);
 
-            Assert.Equal(2, vehiculos.Count());
+            Assert.That(vehiculos.Count(), Is.EqualTo(2));
         }
 
-        [Fact]
-        public async void Should_ConsultarVehiculos_PorMarca_Ok()
+        [Test]
+        public async Task Should_ConsultarVehiculos_PorMarca_Ok()
         {
             const string MARCA = "MAZDA";
             EMarca MARCA_OBJECT = _marcasSeed.First(m => m.Nombre == MARCA);
@@ -168,11 +165,11 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
 
             var vehiculos = await VehiculoInfraestructura.ConsultarVehiculosPorParametrosAsync(MARCA);
 
-            Assert.Equal(MARCA_OBJECT.Id, vehiculos.First().MarcaId);
+            Assert.That(vehiculos.First().MarcaId, Is.EqualTo(MARCA_OBJECT.Id));
         }
 
-        [Fact]
-        public async void Should_ConsultarVehiculo_PorMarcaModelo_Ok()
+        [Test]
+        public async Task Should_ConsultarVehiculo_PorMarcaModelo_Ok()
         {
             const string MARCA = "MAZDA";
             EMarca MARCA_OBJECT = _marcasSeed.First(m => m.Nombre == "MAZDA");
@@ -195,13 +192,16 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
                 _marcaRepositorioMock.Object);
 
             var vehiculos = await VehiculoInfraestructura.ConsultarVehiculosPorParametrosAsync(MARCA, MODELO);
-
-            Assert.Equal(MARCA_OBJECT.Id, vehiculos.First().MarcaId);
-            Assert.Equal(MODELO, vehiculos.First().Modelo);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.That(vehiculos.First().MarcaId, Is.EqualTo(MARCA_OBJECT.Id));
+                Assert.That(vehiculos.First().Modelo, Is.EqualTo(MODELO));
+            });
         }
 
-        [Fact]
-        public async void Should_ConsultarVehiculosPorParametros_ResultadoVacio_Ok()
+        [Test]
+        public async Task Should_ConsultarVehiculosPorParametros_ResultadoVacio_Ok()
         {
             const string MARCA = "MAZDA";
             EMarca MARCA_OBJECT = _marcasSeed.First(m => m.Nombre == "MAZDA");
@@ -215,11 +215,12 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
                 _marcaRepositorioMock.Object);
 
             var vehiculos = await VehiculoInfraestructura.ConsultarVehiculosPorParametrosAsync(MARCA, MODELO);
-            Assert.Empty(vehiculos);
+            
+            Assert.That(vehiculos, Is.Empty);
         }
 
-        [Fact]
-        public async void Should_ThrowException_MarcaNoExiste_Al_ConsultarVehiculosPorParametros()
+        [Test]
+        public void Should_ThrowException_MarcaNoExiste_Al_ConsultarVehiculosPorParametros()
         {
             ECrearVehiculoDto input = new()
             {
@@ -238,16 +239,19 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
                 _marcaRepositorioMock.Object);
 
             Task act() => VehiculoInfraestructura.ConsultarVehiculosPorParametrosAsync(input.Marca, input.Modelo);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
-
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.MarcaNoExisteError.Code);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.MarcaNoExisteError.Code, Is.EqualTo(exception.Code));
+            });
         }
         #endregion
 
         #region CrearVehiculoAsync
-        [Fact]
-        public async void Should_ThrowException_VehiculoYaExiste_Al_CrearVehiculo()
+        [Test]
+        public void Should_ThrowException_VehiculoYaExiste_Al_CrearVehiculo()
         {
             ECrearVehiculoDto input = new()
             {
@@ -265,14 +269,17 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
                 _marcaRepositorioMock.Object);
 
             Task act() => VehiculoInfraestructura.CrearVehiculoAsync(input);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
-
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.VehiculoYaExisteError.Code);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.VehiculoYaExisteError.Code, Is.EqualTo(exception.Code));
+            });
         }
 
-        [Fact]
-        public async void Should_ThrowException_MarcaNoExiste_Al_CrearVehiculo()
+        [Test]
+        public void Should_ThrowException_MarcaNoExiste_Al_CrearVehiculo()
         {
             ECrearVehiculoDto input = new()
             {
@@ -291,14 +298,17 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
                 _marcaRepositorioMock.Object);
 
             Task act() => VehiculoInfraestructura.CrearVehiculoAsync(input);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
-
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.MarcaNoExisteError.Code);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.MarcaNoExisteError.Code, Is.EqualTo(exception.Code));
+            });
         }
 
-        [Fact]
-        public async void Should_CrearVehiculo_Ok()
+        [Test]
+        public async Task Should_CrearVehiculo_Ok()
         {
             ECrearVehiculoDto input = new()
             {
@@ -322,13 +332,14 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
                 _marcaRepositorioMock.Object);
 
             EVehiculo vehiculo = await VehiculoInfraestructura.CrearVehiculoAsync(input);
-            Assert.Equal(input.Placa, vehiculo.Placa);
+            
+            Assert.That(vehiculo.Placa, Is.EqualTo(input.Placa));
         }
         #endregion
 
         #region ActualizarVehiculoAsync
-        [Fact]
-        public async void Should_ThrowException_ActualizacionDatosVaciosExcepcion_Al_ActualizarVehiculo()
+        [Test]
+        public void Should_ThrowException_ActualizacionDatosVaciosExcepcion_Al_ActualizarVehiculo()
         {
             const string PLACA = "ABC01";
             _vehiculoRepositorioMock.Setup(vr => vr.ObtenerPorPlacaAsync(PLACA))
@@ -340,14 +351,17 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
 
             JsonPatchDocument<EVehiculo> jsonPatch = new();
             Task act() => VehiculoInfraestructura.ActualizarVehiculoAsync(PLACA, jsonPatch);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
-
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.ActualizacionDatosVaciosError.Code);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.ActualizacionDatosVaciosError.Code, Is.EqualTo(exception.Code));
+            });
         }
 
-        [Fact]
-        public async void Should_ThrowException_VehiculoNoExiste_Al_ActualizarVehiculo()
+        [Test]
+        public void Should_ThrowException_VehiculoNoExiste_Al_ActualizarVehiculo()
         {
             const string PLACA = "ABC011";
             const decimal NUEVO_AVALUO = 15500;
@@ -361,14 +375,17 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
             var jsonObject = new JsonPatchDocument<EVehiculo>();
             jsonObject.Replace(j => j.Avaluo, NUEVO_AVALUO);
             Task act() => VehiculoInfraestructura.ActualizarVehiculoAsync(PLACA, jsonObject);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
-
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.VehiculoNoExisteError.Code);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.VehiculoNoExisteError.Code, Is.EqualTo(exception.Code));
+            });
         }
 
-        [Fact]
-        public async void Should_ThrowException_MarcaNoExiste_Al_ActualizarVehiculo()
+        [Test]
+        public void Should_ThrowException_MarcaNoExiste_Al_ActualizarVehiculo()
         {
             const string PLACA = "ABC01";
             Guid NUEVA_MARCA = Guid.NewGuid();
@@ -384,14 +401,17 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
             var jsonObject = new JsonPatchDocument<EVehiculo>();
             jsonObject.Replace(j => j.MarcaId, NUEVA_MARCA);
             Task act() => VehiculoInfraestructura.ActualizarVehiculoAsync(PLACA, jsonObject);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
-
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.MarcaNoExisteError.Code);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.MarcaNoExisteError.Code, Is.EqualTo(exception.Code));
+            });
         }
 
-        [Fact]
-        public async void Should_ActualizarVehiculo_Ok()
+        [Test]
+        public async Task Should_ActualizarVehiculo_Ok()
         {
             const string PLACA = "ABC01";
             const decimal NUEVO_AVALUO = 15500;
@@ -409,13 +429,14 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
             var jsonObject = new JsonPatchDocument<EVehiculo>();
             jsonObject.Replace(j => j.Avaluo, NUEVO_AVALUO);
             EVehiculo vehiculo = await VehiculoInfraestructura.ActualizarVehiculoAsync(PLACA, jsonObject);
-            Assert.Equal(NUEVO_AVALUO, vehiculo.Avaluo);
+            
+            Assert.That(vehiculo.Avaluo, Is.EqualTo(NUEVO_AVALUO));
         }
         #endregion
 
         #region EliminarVehiculoAsync
-        [Fact]
-        public async void Should_ThrowException_VehiculoNoExiste_Al_EliminarVehiculo()
+        [Test]
+        public void Should_ThrowException_VehiculoNoExiste_Al_EliminarVehiculo()
         {
             const string PLACA = "CL10";
             _vehiculoRepositorioMock.Setup(vr => vr.ObtenerPorPlacaAsync(PLACA))
@@ -426,14 +447,17 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
                 _marcaRepositorioMock.Object);
 
             Task act() => VehiculoInfraestructura.EliminarVehiculoAsync(PLACA);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
-
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.VehiculoNoExisteError.Code);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.VehiculoNoExisteError.Code, Is.EqualTo(exception.Code));
+            });
         }
 
-        [Fact]
-        public async void Should_EliminarVehiculo_Ok()
+        [Test]
+        public async Task Should_EliminarVehiculo_Ok()
         {
             const string PLACA = "ABC01";
             _vehiculoRepositorioMock.Setup(vr => vr.ObtenerPorPlacaAsync(PLACA))
@@ -446,9 +470,9 @@ namespace arquetipo.Test.Infraestructura.Services.Vehiculos
                 _marcaRepositorioMock.Object);
 
             var resultado = await VehiculoInfraestructura.EliminarVehiculoAsync(PLACA);
-            Assert.Equal(EConstante.VEHICULO_ELIMINADO, resultado);
+            
+            Assert.That(resultado, Is.EqualTo(EConstante.VEHICULO_ELIMINADO));
         }
         #endregion
-
     }
 }

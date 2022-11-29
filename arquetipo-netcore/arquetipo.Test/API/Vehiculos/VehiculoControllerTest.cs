@@ -4,12 +4,6 @@ using arquetipo.Entity.Models;
 using arquetipo.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace arquetipo.Test.API.Vehiculos
 {
@@ -50,7 +44,7 @@ namespace arquetipo.Test.API.Vehiculos
 
 
         #region ConsultarVehiculosAsync
-        [Fact]
+        [Test]
         public async Task Should_Returns_ListaDeVehiculos_Ok()
         {
             var vehiculoInfraestructuraMock = new Mock<IVehiculoInfraestructura>();
@@ -60,12 +54,12 @@ namespace arquetipo.Test.API.Vehiculos
 
             var result = await vehiculoController.ConsultarVehiculosAsync();
 
-            Assert.Equal(2, result.Count());
+            Assert.That(result.Count(), Is.EqualTo(2));
         }
         #endregion
 
         #region ConsultarVehiculoPorPlacaAsync
-        [Fact]
+        [Test]
         public async Task Should_Returns_ConsultarClientePorIdentificacion_Ok()
         {
             const string PLACA = "ABC01";
@@ -82,13 +76,10 @@ namespace arquetipo.Test.API.Vehiculos
 
             var result = await vehiculoController.ConsultarVehiculoPorPlacaAsync(PLACA);
 
-            var response = Assert.IsType<OkObjectResult>(result);
-            var model = Assert.IsAssignableFrom<EVehiculo>(
-                response.Value);
-            Assert.Equal(PLACA, model.Placa);
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
         }
 
-        [Fact]
+        [Test]
         public async Task Should_Returns_AcceptedResponse_When_ConsultarClientePorIdentificacion_NotFound()
         {
             const string PLACA = "AAA100";
@@ -106,9 +97,8 @@ namespace arquetipo.Test.API.Vehiculos
 
             var result = await vehiculoController.ConsultarVehiculoPorPlacaAsync(PLACA);
 
-            Assert.IsType<ContentResult>(result);
+            Assert.That(result, Is.InstanceOf<ContentResult>());
         }
         #endregion
-
     }
 }

@@ -5,12 +5,6 @@ using arquetipo.Infrastructure;
 using arquetipo.Infrastructure.Exceptions;
 using arquetipo.Infrastructure.Services.Patios;
 using Microsoft.AspNetCore.JsonPatch;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace arquetipo.Test.Infraestructura.Services.Patios
 {
@@ -31,8 +25,8 @@ namespace arquetipo.Test.Infraestructura.Services.Patios
         }
 
         #region ConsultarPatiosAsync
-        [Fact]
-        public async void Should_ConsultarPatios_Ok()
+        [Test]
+        public async Task Should_ConsultarPatios_Ok()
         {
             _patioRepositorioMock.Setup(cr => cr.ObtenerTodoAsync())
                 .ReturnsAsync(_patiosSeed);
@@ -40,11 +34,11 @@ namespace arquetipo.Test.Infraestructura.Services.Patios
 
             var patios = await patioInfraestructura.ConsultarPatiosAsync();
 
-            Assert.Equal(2, patios.Count());
+            Assert.That(patios.Count(), Is.EqualTo(2));
         }
 
-        [Fact]
-        public async void Should_ConsultarPatios_ResultadoVacio_Ok()
+        [Test]
+        public async Task Should_ConsultarPatios_ResultadoVacio_Ok()
         {
             _patioRepositorioMock.Setup(cr => cr.ObtenerTodoAsync())
                 .ReturnsAsync(new List<EPatio>());
@@ -52,13 +46,13 @@ namespace arquetipo.Test.Infraestructura.Services.Patios
 
             var patios = await patioInfraestructura.ConsultarPatiosAsync();
 
-            Assert.Empty(patios);
+            Assert.That(patios, Is.Empty);
         }
         #endregion
 
         #region ConsultarPatioPorPuntoVentaAsync
-        [Fact]
-        public async void Should_ConsultarPatioPorPuntoVenta_Ok()
+        [Test]
+        public async Task Should_ConsultarPatioPorPuntoVenta_Ok()
         {
             const short PUNTO_VENTA = 1;
             var patioSeed = new EPatio(Guid.NewGuid(), "Patio 1", "DIR 01", "010101", 1);
@@ -68,11 +62,11 @@ namespace arquetipo.Test.Infraestructura.Services.Patios
 
             var patio = await patioInfraestructura.ConsultarPatioPorPuntoVentaAsync(PUNTO_VENTA);
 
-            Assert.Equal(PUNTO_VENTA, patio.NumeroPuntoVenta);
+            Assert.That(patio.NumeroPuntoVenta, Is.EqualTo(PUNTO_VENTA));
         }
 
-        [Fact]
-        public async void Should_ThrowException_PatioNoExiste_Al_ConsultarPatioPorPuntoVenta()
+        [Test]
+        public void Should_ThrowException_PatioNoExiste_Al_ConsultarPatioPorPuntoVenta()
         {
             const short PUNTO_VENTA = 100;
             _patioRepositorioMock.Setup(pr => pr.ObtenerPorPuntoVentaAsync(PUNTO_VENTA))
@@ -80,16 +74,19 @@ namespace arquetipo.Test.Infraestructura.Services.Patios
             var patioInfraestructura = new PatioInfraestructura(_patioRepositorioMock.Object);
 
             Task act() => patioInfraestructura.ConsultarPatioPorPuntoVentaAsync(PUNTO_VENTA);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.PatioNoExisteError.Code);
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.PatioNoExisteError.Code, Is.EqualTo(exception.Code));
+            });
         }
         #endregion
 
         #region CrearPatioAsync
-        [Fact]
-        public async void Should_ThrowException_PatioYaExiste_Al_CrearPatio()
+        [Test]
+        public void Should_ThrowException_PatioYaExiste_Al_CrearPatio()
         {
             ECrearPatioDto input = new()
             {
@@ -104,14 +101,17 @@ namespace arquetipo.Test.Infraestructura.Services.Patios
             var patioInfraestructura = new PatioInfraestructura(_patioRepositorioMock.Object);
 
             Task act() => patioInfraestructura.CrearPatioAsync(input);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.PatioYaExisteError.Code);
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.PatioYaExisteError.Code, Is.EqualTo(exception.Code));
+            });
         }
 
-        [Fact]
-        public async void Should_CrearPatio_Ok()
+        [Test]
+        public async Task Should_CrearPatio_Ok()
         {
             ECrearPatioDto input = new()
             {
@@ -130,13 +130,14 @@ namespace arquetipo.Test.Infraestructura.Services.Patios
             var patioInfraestructura = new PatioInfraestructura(_patioRepositorioMock.Object);
 
             var patio = await patioInfraestructura.CrearPatioAsync(input);
-            Assert.Equal(input.NumeroPuntoVenta, patio.NumeroPuntoVenta);
+
+            Assert.That(patio.NumeroPuntoVenta, Is.EqualTo(input.NumeroPuntoVenta));
         }
         #endregion
 
         #region ActualizarPatioAsync
-        [Fact]
-        public async void Should_ThrowException_ActualizacionDatosVaciosExcepcion_Al_ActualizarPatio()
+        [Test]
+        public void Should_ThrowException_ActualizacionDatosVaciosExcepcion_Al_ActualizarPatio()
         {
             const short PUNTO_VENTA = 1;
             _patioRepositorioMock.Setup(pr => pr.ObtenerPorPuntoVentaAsync(PUNTO_VENTA))
@@ -149,18 +150,21 @@ namespace arquetipo.Test.Infraestructura.Services.Patios
             var jsonObject = new JsonPatchDocument<EPatio>();
 
             Task act() => patioInfraestructura.ActualizarPatioAsync(PUNTO_VENTA, jsonObject);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.ActualizacionDatosVaciosError.Code);
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.ActualizacionDatosVaciosError.Code, Is.EqualTo(exception.Code));
+            });
         }
 
-        [Fact]
-        public async void Should_ThrowException_PatioNoExiste_Al_ActualizarPatio()
+        [Test]
+        public void Should_ThrowException_PatioNoExiste_Al_ActualizarPatio()
         {
             const short PUNTO_VENTA = 12;
             const string NUEVO_TELEFONO = "0999999999";
-            
+
             _patioRepositorioMock.Setup(pr => pr.ObtenerPorPuntoVentaAsync(PUNTO_VENTA))
                 .Returns(Task.FromResult<EPatio?>(null));
             var patioInfraestructura = new PatioInfraestructura(_patioRepositorioMock.Object);
@@ -168,14 +172,17 @@ namespace arquetipo.Test.Infraestructura.Services.Patios
             var jsonObject = new JsonPatchDocument<EPatio>();
             jsonObject.Replace(j => j.Telefono, NUEVO_TELEFONO);
             Task act() => patioInfraestructura.ActualizarPatioAsync(PUNTO_VENTA, jsonObject);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.PatioNoExisteError.Code);
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.PatioNoExisteError.Code, Is.EqualTo(exception.Code));
+            });
         }
 
-        [Fact]
-        public async void Should_ActualizarPatio_Ok()
+        [Test]
+        public async Task Should_ActualizarPatio_Ok()
         {
             const short PUNTO_VENTA = 1;
             const string NUEVO_TELEFONO = "0999999999";
@@ -189,15 +196,16 @@ namespace arquetipo.Test.Infraestructura.Services.Patios
             var patioInfraestructura = new PatioInfraestructura(_patioRepositorioMock.Object);
             var jsonObject = new JsonPatchDocument<EPatio>();
             jsonObject.Replace(j => j.Telefono, NUEVO_TELEFONO);
-            
+
             var patio = await patioInfraestructura.ActualizarPatioAsync(PUNTO_VENTA, jsonObject);
-            Assert.Equal(NUEVO_TELEFONO, patio.Telefono);
+
+            Assert.That(patio.Telefono, Is.EqualTo(NUEVO_TELEFONO));
         }
         #endregion
 
         #region EliminarPatioAsync
-        [Fact]
-        public async void Should_ThrowException_PatioNoExiste_Al_EliminarPatio()
+        [Test]
+        public void Should_ThrowException_PatioNoExiste_Al_EliminarPatio()
         {
             const short PUNTO_VENTA = 99;
             _patioRepositorioMock.Setup(pr => pr.ObtenerPorPuntoVentaAsync(PUNTO_VENTA))
@@ -206,15 +214,17 @@ namespace arquetipo.Test.Infraestructura.Services.Patios
             var patioInfraestructura = new PatioInfraestructura(_patioRepositorioMock.Object);
 
             Task act() => patioInfraestructura.EliminarPatioAsync(PUNTO_VENTA);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.PatioNoExisteError.Code);
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.PatioNoExisteError.Code, Is.EqualTo(exception.Code));
+            });
         }
 
-        
-        [Fact]
-        public async void Should_EliminarPatio_Ok()
+        [Test]
+        public async Task Should_EliminarPatio_Ok()
         {
             const short PUNTO_VENTA = 1;
             _patioRepositorioMock.Setup(pr => pr.ObtenerPorPuntoVentaAsync(PUNTO_VENTA))
@@ -225,7 +235,8 @@ namespace arquetipo.Test.Infraestructura.Services.Patios
             var patioInfraestructura = new PatioInfraestructura(_patioRepositorioMock.Object);
 
             var resultado = await patioInfraestructura.EliminarPatioAsync(PUNTO_VENTA);
-            Assert.Equal(EConstante.PATIO_ELIMINADO, resultado);
+
+            Assert.That(resultado, Is.EqualTo(EConstante.PATIO_ELIMINADO));
         }
         #endregion
     }
