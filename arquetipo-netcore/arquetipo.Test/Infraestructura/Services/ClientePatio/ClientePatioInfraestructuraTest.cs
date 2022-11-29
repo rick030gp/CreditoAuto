@@ -7,12 +7,6 @@ using arquetipo.Infrastructure;
 using arquetipo.Infrastructure.Exceptions;
 using arquetipo.Infrastructure.Services.ClientePatio;
 using Microsoft.AspNetCore.JsonPatch;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace arquetipo.Test.Infraestructura.Services.ClientePatio
 {
@@ -44,8 +38,8 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
         }
 
         #region AsociarClientePatioAsync
-        [Fact]
-        public async Task Should_ThrowException_ClienteNoExiste_Al_AsociarClientePatio()
+        [Test]
+        public void Should_ThrowException_ClienteNoExiste_Al_AsociarClientePatio()
         {
             const string IDENTIFICACION = "CL10";
             const short NUMERO_PUNTO_VENTA = 1;
@@ -65,13 +59,13 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
             };
 
             Task act() => clientePatioInfraestructura.AsociarClientePatioAsync(input);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.Equal(CrAutoErrores.ClienteNoExisteError.Code, exception.Code);
+            Assert.That(exception.Code, Is.EqualTo(CrAutoErrores.ClienteNoExisteError.Code));
         }
 
-        [Fact]
-        public async Task Should_ThrowException_PatioNoExiste_Al_AsociarClientePatio()
+        [Test]
+        public void Should_ThrowException_PatioNoExiste_Al_AsociarClientePatio()
         {
             const string IDENTIFICACION = "CL01";
             const short NUMERO_PUNTO_VENTA = 100;
@@ -93,12 +87,12 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
             };
 
             Task act() => clientePatioInfraestructura.AsociarClientePatioAsync(input);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.Equal(CrAutoErrores.PatioNoExisteError.Code, exception.Code);
+            Assert.That(exception.Code, Is.EqualTo(CrAutoErrores.PatioNoExisteError.Code));
         }
 
-        [Fact]
+        [Test]
         public async Task Should_AsociarClientePatio_OK()
         {
             const string IDENTIFICACION = "CL01";
@@ -131,11 +125,14 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
 
             var clientePatio = await clientePatioInfraestructura.AsociarClientePatioAsync(input);
             
-            Assert.Equal(cliente.Id, clientePatio.ClienteId);
-            Assert.Equal(patio.Id, clientePatio.PatioId);
+            Assert.Multiple(() =>
+            {
+                Assert.That(clientePatio.ClienteId, Is.EqualTo(cliente.Id));
+                Assert.That(clientePatio.PatioId, Is.EqualTo(patio.Id));
+            });
         }
 
-        [Fact]
+        [Test]
         public async Task Should_Not_AsociarClientePatio_Duplicado_OK()
         {
             const string IDENTIFICACION = "CL01";
@@ -168,15 +165,18 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
                 _clientePatioRepositorioMock.Object);
 
             var clientePatio = await clientePatioInfraestructura.AsociarClientePatioAsync(input);
-
-            Assert.Equal(cliente.Id, clientePatio.ClienteId);
-            Assert.Equal(patio.Id, clientePatio.PatioId);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.That(clientePatio.ClienteId, Is.EqualTo(cliente.Id));
+                Assert.That(clientePatio.PatioId, Is.EqualTo(patio.Id));
+            });
         }
         #endregion
 
         #region ActualizarAsociacionClientePatiosAsync
-        [Fact]
-        public async void Should_ThrowException_ActualizacionDatosVaciosExcepcion_Al_ActualizarAsociacionClientePatios()
+        [Test]
+        public void Should_ThrowException_ActualizacionDatosVaciosExcepcion_Al_ActualizarAsociacionClientePatios()
         {
             var clientePatioInfraestructura = new ClientePatioInfraestructura(
                 _clienteRepositorioMock.Object,
@@ -186,13 +186,16 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
             JsonPatchDocument<EClientePatio> jsonPatch = new();
             Task act() => clientePatioInfraestructura.ActualizarAsociacionClientePatioAsync(
                 Guid.NewGuid(), jsonPatch);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
-
-            Assert.NotNull(exception);
-            Assert.Equal(exception.Code, CrAutoErrores.ActualizacionDatosVaciosError.Code);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.That(exception, Is.Not.Null);
+                Assert.That(CrAutoErrores.ActualizacionDatosVaciosError.Code, Is.EqualTo(exception.Code));
+            });
         }
 
-        [Fact]
+        [Test]
         public async Task Should_ThrowException_AsociacionClientePatioNoExiste_Al_ActualizarAsociacionClientePatio()
         {
             _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorIdAsync(Guid.NewGuid()))
@@ -207,13 +210,13 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
 
             Task act() => clientePatioInfraestructura.ActualizarAsociacionClientePatioAsync(
                 Guid.NewGuid(), jsonObject);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.Equal(CrAutoErrores.AsociacionClientePatioNoExiste.Code, exception.Code);
+            Assert.That(exception.Code, Is.EqualTo(CrAutoErrores.AsociacionClientePatioNoExiste.Code));
         }
 
-        [Fact]
-        public async Task Should_ThrowException_ClienteNoExiste_Al_ActualizarAsociacionClientePatio()
+        [Test]
+        public void Should_ThrowException_ClienteNoExiste_Al_ActualizarAsociacionClientePatio()
         {
             var cliente = _clientesSeed.First(c => c.Identificacion == "CL01");
             var patio = _patiosSeed.First(p => p.NumeroPuntoVenta == 1);
@@ -234,18 +237,18 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
 
             Task act() => clientePatioInfraestructura.ActualizarAsociacionClientePatioAsync(
                 CLIENTE_PATIO_ACTUALIZAR.Id, jsonObject);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.Equal(CrAutoErrores.ClienteNoExisteError.Code, exception.Code);
+            Assert.That(exception.Code, Is.EqualTo(CrAutoErrores.ClienteNoExisteError.Code));
         }
 
-        [Fact]
-        public async Task Should_ThrowException_PatioNoExiste_Al_ActualizarAsociacionClientePatio()
+        [Test]
+        public void Should_ThrowException_PatioNoExiste_Al_ActualizarAsociacionClientePatio()
         {
             var cliente = _clientesSeed.First(c => c.Identificacion == "CL01");
             var patio = _patiosSeed.First(p => p.NumeroPuntoVenta == 1);
             EClientePatio CLIENTE_PATIO_ACTUALIZAR = new(Guid.NewGuid(), cliente.Id, patio.Id);
-            
+
             _patioRepositorioMock.Setup(pr => pr.ObtenerPorIdAsync(Guid.NewGuid()))
                 .Returns(Task.FromResult<EPatio?>(null));
             _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorIdAsync(CLIENTE_PATIO_ACTUALIZAR.Id))
@@ -261,12 +264,12 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
 
             Task act() => clientePatioInfraestructura.ActualizarAsociacionClientePatioAsync(
                 CLIENTE_PATIO_ACTUALIZAR.Id, jsonObject);
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.Equal(CrAutoErrores.PatioNoExisteError.Code, exception.Code);
+            Assert.That(exception.Code, Is.EqualTo(CrAutoErrores.PatioNoExisteError.Code));
         }
 
-        [Fact]
+        [Test]
         public async Task Should_ActualizarAsociacionClientePatio_Ok()
         {
             var cliente = _clientesSeed.First(c => c.Identificacion == "CL01");
@@ -296,11 +299,14 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
             var resultado = await clientePatioInfraestructura.ActualizarAsociacionClientePatioAsync(
                 CLIENTE_PATIO_ACTUALIZAR.Id, jsonObject);
             
-            Assert.Equal(clienteActualizar.Id, resultado.ClienteId);
-            Assert.Equal(patioActualizar.Id, resultado.PatioId);
+            Assert.Multiple(() =>
+            {
+                Assert.That(resultado.ClienteId, Is.EqualTo(clienteActualizar.Id));
+                Assert.That(resultado.PatioId, Is.EqualTo(patioActualizar.Id));
+            });
         }
 
-        [Fact]
+        [Test]
         public async Task Should_Not_ActualizarAsociacionClientePatio_Duplicado_Ok()
         {
             var cliente = _clientesSeed.First(c => c.Identificacion == "CL01");
@@ -330,15 +336,18 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
 
             var resultado = await clientePatioInfraestructura.ActualizarAsociacionClientePatioAsync(
                 CLIENTE_PATIO_ACTUALIZAR.Id, jsonObject);
-
-            Assert.Equal(clienteActualizar.Id, resultado.ClienteId);
-            Assert.Equal(patioActualizar.Id, resultado.PatioId);
+            
+            Assert.Multiple(() =>
+            {
+                Assert.That(resultado.ClienteId, Is.EqualTo(clienteActualizar.Id));
+                Assert.That(resultado.PatioId, Is.EqualTo(patioActualizar.Id));
+            });
         }
         #endregion
 
         #region EliminarAsociacionClientePatioAsync
-        [Fact]
-        public async Task Should_ThrowException_AsociacionClientePatioNoExiste_Al_EliminarAsociacionClientePatio()
+        [Test]
+        public void Should_ThrowException_AsociacionClientePatioNoExiste_Al_EliminarAsociacionClientePatio()
         {
             _clientePatioRepositorioMock.Setup(cpr => cpr.ObtenerPorIdAsync(Guid.NewGuid()))
                 .Returns(Task.FromResult<EClientePatio?>(null));
@@ -348,13 +357,13 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
                 _clientePatioRepositorioMock.Object);
 
             Task act() => clientePatioInfraestructura.EliminarAsociacionClientePatioAsync(Guid.NewGuid());
-            var exception = await Assert.ThrowsAsync<CrAutoExcepcion>(act);
+            var exception = Assert.ThrowsAsync<CrAutoExcepcion>(act);
 
-            Assert.Equal(CrAutoErrores.AsociacionClientePatioNoExiste.Code, exception.Code);
+            Assert.That(exception.Code, Is.EqualTo(CrAutoErrores.AsociacionClientePatioNoExiste.Code));
         }
-  
 
-        [Fact]
+
+        [Test]
         public async Task Should_EliminarAsociacionClientePatio_OK()
         {
             var cliente = _clientesSeed.First(c => c.Identificacion == "CL01");
@@ -374,8 +383,8 @@ namespace arquetipo.Test.Infraestructura.Services.ClientePatio
                 _clientePatioRepositorioMock.Object);
 
             var resultado = await clientePatioInfraestructura.EliminarAsociacionClientePatioAsync(clientePatio.Id);
-            
-            Assert.Equal(EConstante.CLIENTE_PATIO_ELIMINADO, resultado);
+
+            Assert.That(resultado, Is.EqualTo(EConstante.CLIENTE_PATIO_ELIMINADO));
         }
         #endregion
     }

@@ -4,12 +4,6 @@ using arquetipo.Entity.Models;
 using arquetipo.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace arquetipo.Test.API.Patios
 {
@@ -27,7 +21,7 @@ namespace arquetipo.Test.API.Patios
         }
 
         #region ConsultarPatiosAsync
-        [Fact]
+        [Test]
         public async Task Should_Returns_ListaDePatios_Ok()
         {
             var patioInfraestructuraMock = new Mock<IPatioInfraestructura>();
@@ -37,12 +31,12 @@ namespace arquetipo.Test.API.Patios
 
             var result = await patioController.ConsultarPatiosAsync();
 
-            Assert.Equal(2, result.Count());
+            Assert.That(result.Count(), Is.EqualTo(2));
         }
         #endregion
 
         #region ConsultarPatioPorPuntoVentaAsync
-        [Fact]
+        [Test]
         public async Task Should_Returns_PatioEncontrado_Ok()
         {
             const short PUNTO_VENTA = 1;
@@ -59,13 +53,10 @@ namespace arquetipo.Test.API.Patios
 
             var result = await patioController.ConsultarPatioPorPuntoVentaAsync(PUNTO_VENTA);
 
-            var response = Assert.IsType<OkObjectResult>(result);
-            var model = Assert.IsAssignableFrom<EPatio>(
-                response.Value);
-            Assert.Equal(PUNTO_VENTA, model.NumeroPuntoVenta);
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
         }
 
-        [Fact]
+        [Test]
         public async Task Should_Returns_AcceptedResponse_When_ConsultarPatioPorPuntoVenta_NotFound()
         {
             const short PUNTO_VENTA = 1;
@@ -83,9 +74,8 @@ namespace arquetipo.Test.API.Patios
 
             var result = await patioController.ConsultarPatioPorPuntoVentaAsync(PUNTO_VENTA);
 
-            Assert.IsType<ContentResult>(result);
+            Assert.That(result, Is.InstanceOf<ContentResult>());
         }
         #endregion
-
     }
 }

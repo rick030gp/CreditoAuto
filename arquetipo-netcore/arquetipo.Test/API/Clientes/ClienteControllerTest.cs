@@ -4,14 +4,8 @@ using arquetipo.Entity.Models;
 using arquetipo.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
 
-namespace arquetipo.Test.API
+namespace arquetipo.Test.API.Clientes
 {
     public class ClienteControllerTest
     {
@@ -27,7 +21,7 @@ namespace arquetipo.Test.API
         }
 
         #region ConsultarClientesAsync
-        [Fact]
+        [Test]
         public async Task Should_Returns_ListaDeClientes_Ok()
         {
             var clienteInfraestructuraMock = new Mock<IClienteInfraestructura>();
@@ -37,12 +31,12 @@ namespace arquetipo.Test.API
 
             var result = await clienteController.ConsultarClientesAsync();
 
-            Assert.Equal(2, result.Count());
+            Assert.That(result.Count(), Is.EqualTo(2));
         }
         #endregion
 
         #region ConsultarClientePorIdentificacionAsync
-        [Fact]
+        [Test]
         public async Task Should_Returns_ConsultarClientePorIdentificacion_Ok()
         {
             const string IDENTIFICACION = "CL01";
@@ -59,13 +53,10 @@ namespace arquetipo.Test.API
 
             var result = await clienteController.ConsultarClientePorIdentificacionAsync(IDENTIFICACION);
 
-            var response = Assert.IsType<OkObjectResult>(result);
-            var model = Assert.IsAssignableFrom<ECliente>(
-                response.Value);
-            Assert.Equal(IDENTIFICACION, model.Identificacion);
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
         }
 
-        [Fact]
+        [Test]
         public async Task Should_Returns_AcceptedResponse_When_ConsultarClientePorIdentificacion_NotFound()
         {
             const string IDENTIFICACION = "CL99";
@@ -83,9 +74,8 @@ namespace arquetipo.Test.API
 
             var result = await clienteController.ConsultarClientePorIdentificacionAsync(IDENTIFICACION);
 
-            Assert.IsType<ContentResult>(result);
+            Assert.That(result, Is.InstanceOf<ContentResult>());
         }
         #endregion
-
     }
 }
