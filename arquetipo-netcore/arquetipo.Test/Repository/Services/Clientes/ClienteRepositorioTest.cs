@@ -153,9 +153,6 @@ namespace arquetipo.Test.Repository.Services.Clientes
             clienteAActualizar.Direccion = NUEVA_DIRECCION;
 
             var clientesDbSetMock = MockUtility.CreateDbSetMock(_clientesSeed.AsQueryable());
-            clientesDbSetMock.Setup(m => m.Update(It.IsAny<ECliente>()))
-                .Returns(It.IsAny<EntityEntry<ECliente>>);
-
             _dbContextMock.Setup(m => m.Set<ECliente>()).Returns(clientesDbSetMock.Object);
 
             var clienteRepositorio = new ClienteRepositorio(_dbContextMock.Object);

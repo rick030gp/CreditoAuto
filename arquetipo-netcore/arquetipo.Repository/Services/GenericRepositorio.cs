@@ -40,7 +40,7 @@ namespace arquetipo.Repository.Services
 
         public async Task<TEntity> ActualizarAsync(TEntity entity)
         {
-            _dbSet.Update(entity).State = EntityState.Modified;
+            _dbSet.Update(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
