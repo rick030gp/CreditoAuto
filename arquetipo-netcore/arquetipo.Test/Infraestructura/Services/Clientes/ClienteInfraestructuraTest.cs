@@ -82,7 +82,7 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
             Assert.Multiple(() =>
             {
                 Assert.That(exception, Is.Not.Null);
-                Assert.That(CrAutoErrores.ClienteNoExisteError.Code, Is.EqualTo(exception.Code));
+                Assert.That(CrAutoErrores.ClienteNoExisteError.Code, Is.EqualTo(exception?.Code));
             });
         }
         #endregion
@@ -115,7 +115,7 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
             Assert.Multiple(() =>
             {
                 Assert.That(exception, Is.Not.Null);
-                Assert.That(CrAutoErrores.ClienteYaExisteError.Code, Is.EqualTo(exception.Code));
+                Assert.That(CrAutoErrores.ClienteYaExisteError.Code, Is.EqualTo(exception?.Code));
             });
         }
 
@@ -170,7 +170,7 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
             Assert.Multiple(() =>
             {
                 Assert.That(exception, Is.Not.Null);
-                Assert.That(CrAutoErrores.ActualizacionDatosVaciosError.Code, Is.EqualTo(exception.Code));
+                Assert.That(CrAutoErrores.ActualizacionDatosVaciosError.Code, Is.EqualTo(exception?.Code));
             });
         }
 
@@ -197,7 +197,7 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
             Assert.Multiple(() =>
             {
                 Assert.That(exception, Is.Not.Null);
-                Assert.That(CrAutoErrores.ClienteNoExisteError.Code, Is.EqualTo(exception.Code));
+                Assert.That(CrAutoErrores.ClienteNoExisteError.Code, Is.EqualTo(exception?.Code));
             });
         }
 
@@ -250,7 +250,7 @@ namespace arquetipo.Test.Infraestructura.Services.Clientes
             Assert.Multiple(() =>
             {
                 Assert.That(exception, Is.Not.Null);
-                Assert.That(CrAutoErrores.ClienteNoExisteError.Code, Is.EqualTo(exception.Code));
+                Assert.That(CrAutoErrores.ClienteNoExisteError.Code, Is.EqualTo(exception?.Code));
             });
         }
 
