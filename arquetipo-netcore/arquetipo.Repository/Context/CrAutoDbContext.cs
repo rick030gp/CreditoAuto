@@ -5,13 +5,13 @@ namespace arquetipo.Repository.Context
 {
     public class CrAutoDbContext : DbContext
     {
-        public DbSet<ECliente> Clientes { get; set; }
-        public DbSet<EPatio> Patios { get; set; }
-        public DbSet<EMarca> Marcas { get; set; }
-        public DbSet<EEjecutivo> Ejecutivos { get; set; }
-        public DbSet<EVehiculo> Vehiculos { get; set; }
-        public DbSet<ESolicitudCredito> SolicitudesCredito { get; set; }
-        public DbSet<EClientePatio> ClientePatios { get; set; }
+        public virtual DbSet<ECliente>? Clientes { get; set; }
+        public virtual DbSet<EPatio>? Patios { get; set; }
+        public virtual DbSet<EMarca>? Marcas { get; set; }
+        public virtual DbSet<EEjecutivo>? Ejecutivos { get; set; }
+        public virtual DbSet<EVehiculo>? Vehiculos { get; set; }
+        public virtual DbSet<ESolicitudCredito>? SolicitudesCredito { get; set; }
+        public virtual DbSet<EClientePatio>? ClientePatios { get; set; }
 
         public CrAutoDbContext(DbContextOptions options) 
             : base(options) { }
