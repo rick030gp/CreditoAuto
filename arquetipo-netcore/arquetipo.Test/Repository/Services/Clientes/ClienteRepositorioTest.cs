@@ -2,7 +2,6 @@ using arquetipo.Entity.Models;
 using arquetipo.Repository.Context;
 using arquetipo.Repository.Services.Clientes;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace arquetipo.Test.Repository.Services.Clientes
 {
@@ -178,7 +177,7 @@ namespace arquetipo.Test.Repository.Services.Clientes
             Assert.Multiple(() =>
             {
                 Assert.That(cliente, Is.Not.Null);
-                Assert.That(IDENTIFICACION, Is.EqualTo(cliente?.Identificacion));
+                Assert.That(cliente?.Identificacion, Is.EqualTo(IDENTIFICACION));
             });
         }
 

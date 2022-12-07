@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace arquetipo.Test.Repository
 {
+    [ExcludeFromCodeCoverage]
     internal class TestAsyncEnumerator<T> : IAsyncEnumerator<T>
     {
         private readonly IEnumerator<T> enumerator;

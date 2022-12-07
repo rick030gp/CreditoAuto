@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 
 namespace arquetipo.Test.Repository
 {
+    [ExcludeFromCodeCoverage]
     internal class TestAsyncEnumerable<T> : EnumerableQuery<T>, IAsyncEnumerable<T>, IQueryable<T>
     {
         public TestAsyncEnumerable(IEnumerable<T> enumerable)

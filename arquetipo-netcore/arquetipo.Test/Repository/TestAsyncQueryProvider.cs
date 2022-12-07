@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace arquetipo.Test.Repository
 {
+    [ExcludeFromCodeCoverage]
     internal class TestAsyncQueryProvider<TEntity> : IAsyncQueryProvider
     {
         private readonly IQueryProvider _innerQueryProvider;

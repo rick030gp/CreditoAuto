@@ -1,8 +1,10 @@
 ﻿using arquetipo.Entity.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace arquetipo.Repository.Context
 {
+    [ExcludeFromCodeCoverage]
     public class CrAutoDbContext : DbContext
     {
         public virtual DbSet<ECliente>? Clientes { get; set; }
