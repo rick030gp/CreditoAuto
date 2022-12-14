@@ -13,10 +13,14 @@ namespace arquetipo.API.Controllers.SolicitudCredito
     public class SolicitudCreditoController : ControllerBase
     {
         private readonly ISolicitudCreditoInfraestructura _solicitudCreditoInfraestructura;
+        private readonly ILogger<SolicitudCreditoController> _logger;
 
-        public SolicitudCreditoController(ISolicitudCreditoInfraestructura solicitudCreditoInfraestructura)
+        public SolicitudCreditoController(
+            ISolicitudCreditoInfraestructura solicitudCreditoInfraestructura,
+            ILogger<SolicitudCreditoController> logger)
         {
             _solicitudCreditoInfraestructura = solicitudCreditoInfraestructura;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -25,11 +29,13 @@ namespace arquetipo.API.Controllers.SolicitudCredito
         {
             try
             {
+                _logger.LogInformation("Registro de solicitud de crédito: Cliente: {identificacion}, Patio {numeroPuntoVenta}, Vehiculo: {placa}", input.IdentificacionCliente, input.NumeroPuntoVentaPatio, input.PlacaVehiculo);
                 var solicitud = await _solicitudCreditoInfraestructura.CrearSolicitudCreditoAsync(input);
                 return Ok(solicitud);
             }
             catch (CrAutoExcepcion ex)
             {
+                _logger.LogInformation(ex, "Registro de solicitud de crédito fallida: Cliente: {identificacion}, Patio {numeroPuntoVenta}, Vehiculo: {placa}", input.IdentificacionCliente, input.NumeroPuntoVentaPatio, input.PlacaVehiculo);
                 var result = Content(JsonSerializer.Serialize(new Error(ex)));
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return result;

@@ -14,16 +14,21 @@ namespace arquetipo.API.Controllers.Clients
     public class ClienteController : ControllerBase
     {
         private readonly IClienteInfraestructura _clienteInfraestructura;
+        private readonly ILogger<ClienteController> _logger;
 
-        public ClienteController(IClienteInfraestructura clienteInfraestructura)
+        public ClienteController(
+            IClienteInfraestructura clienteInfraestructura,
+            ILogger<ClienteController> logger)
         {
             _clienteInfraestructura = clienteInfraestructura;
+            _logger = logger;
         }
 
         [HttpGet]
         [Route("ConsultarTodos001")]
         public async Task<IEnumerable<ECliente>> ConsultarClientesAsync()
         {
+            _logger.LogInformation("Consultando todos los clientes");
             return await _clienteInfraestructura.ConsultarClientesAsync();
         }
 
@@ -33,11 +38,13 @@ namespace arquetipo.API.Controllers.Clients
         {
             try
             {
+                _logger.LogInformation("Consultando cliente {identificacion}", identificacion);
                 var cliente = await _clienteInfraestructura.ConsultarClientePorIdentificacionAsync(identificacion);
                 return Ok(cliente);
             }
             catch (CrAutoExcepcion ex)
             {
+                _logger.LogError(ex, "Cliente {identificacion} no encontrado", identificacion);
                 var result = Content(JsonSerializer.Serialize(new Error(ex)));
                 HttpContext.Response.StatusCode = (int) HttpStatusCode.Accepted;
                 return result;
@@ -50,11 +57,13 @@ namespace arquetipo.API.Controllers.Clients
         {
             try
             {
+                _logger.LogInformation("Insertando cliente {identificacion}", input.Identificacion);
                 var cliente = await _clienteInfraestructura.CrearClienteAsync(input);
                 return Ok(cliente);
             }
             catch (CrAutoExcepcion ex)
             {
+                _logger.LogError(ex, "Inserción de cliente {identificacion} fallida", input.Identificacion);
                 var result = Content(JsonSerializer.Serialize(new Error(ex)));
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return result;
@@ -67,11 +76,13 @@ namespace arquetipo.API.Controllers.Clients
         {
             try
             {
+                _logger.LogInformation("Actualizando cliente {identificacion}", identificacion);
                 var cliente = await _clienteInfraestructura.ActualizarClienteAsync(identificacion, input);
                 return Ok(cliente);
             }
             catch (CrAutoExcepcion ex)
             {
+                _logger.LogError(ex, "Actualización de cliente {identificacion} fallida", identificacion);
                 var result = Content(JsonSerializer.Serialize(new Error(ex)));
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return result;
@@ -84,11 +95,13 @@ namespace arquetipo.API.Controllers.Clients
         {
             try
             {
+                _logger.LogInformation("Eliminando cliente {identificacion}", identificacion);
                 var result = await _clienteInfraestructura.EliminarClienteAsync(identificacion);
                 return Ok(result);
             }
             catch (CrAutoExcepcion ex)
             {
+                _logger.LogError(ex, "Eliminación de cliente {identificacion} fallida", identificacion);
                 var result = Content(JsonSerializer.Serialize(new Error(ex)));
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return result;

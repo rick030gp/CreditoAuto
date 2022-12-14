@@ -4,12 +4,14 @@ using arquetipo.Entity.Models;
 using arquetipo.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace arquetipo.Test.API.Patios
 {
     public class PatioControllerTest
     {
         private readonly List<EPatio> _patiosSeed;
+        private readonly Mock<ILogger<PatioController>> _logger;
 
         public PatioControllerTest()
         {
@@ -18,6 +20,8 @@ namespace arquetipo.Test.API.Patios
                 new EPatio(Guid.NewGuid(), "Patio 1", "DIR 01", "010101", 1),
                 new EPatio(Guid.NewGuid(), "Patio 2", "DIR 02", "020202", 2)
             };
+
+            _logger = new Mock<ILogger<PatioController>>();
         }
 
         #region ConsultarPatiosAsync
@@ -27,7 +31,9 @@ namespace arquetipo.Test.API.Patios
             var patioInfraestructuraMock = new Mock<IPatioInfraestructura>();
             patioInfraestructuraMock.Setup(pi => pi.ConsultarPatiosAsync())
                 .ReturnsAsync(_patiosSeed);
-            var patioController = new PatioController(patioInfraestructuraMock.Object);
+            var patioController = new PatioController(
+                patioInfraestructuraMock.Object,
+                _logger.Object);;
 
             var result = await patioController.ConsultarPatiosAsync();
 
@@ -43,7 +49,9 @@ namespace arquetipo.Test.API.Patios
             var patioInfraestructuraMock = new Mock<IPatioInfraestructura>();
             patioInfraestructuraMock.Setup(pi => pi.ConsultarPatioPorPuntoVentaAsync(PUNTO_VENTA))
                 .ReturnsAsync(_patiosSeed.First(p => p.NumeroPuntoVenta == PUNTO_VENTA));
-            var patioController = new PatioController(patioInfraestructuraMock.Object)
+            var patioController = new PatioController(
+                patioInfraestructuraMock.Object,
+                _logger.Object)
             {
                 ControllerContext = new ControllerContext
                 {
@@ -64,7 +72,9 @@ namespace arquetipo.Test.API.Patios
             patioInfraestructuraMock.Setup(pi => pi.ConsultarPatioPorPuntoVentaAsync(PUNTO_VENTA))
                 .ThrowsAsync(new CrAutoExcepcion(CrAutoErrores.PatioNoExisteError));
 
-            var patioController = new PatioController(patioInfraestructuraMock.Object)
+            var patioController = new PatioController(
+                patioInfraestructuraMock.Object,
+                _logger.Object)
             {
                 ControllerContext = new ControllerContext
                 {
