@@ -22,9 +22,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.AddFile("Logs/CrAuto-{Date}.txt");
 
 builder.Services.AddDbContext<CrAutoDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 
 // Add services to the container.
 
