@@ -14,10 +14,14 @@ namespace arquetipo.API.Controllers.ClientePatio
     public class ClientePatioController : ControllerBase
     {
         private readonly IClientePatioInfraestructura _clientePatioInfraestructura;
+        private readonly ILogger<ClientePatioController> _logger;
 
-        public ClientePatioController(IClientePatioInfraestructura clientePatioInfraestructura)
+        public ClientePatioController(
+            IClientePatioInfraestructura clientePatioInfraestructura,
+            ILogger<ClientePatioController> logger)
         {
             _clientePatioInfraestructura = clientePatioInfraestructura;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -26,11 +30,13 @@ namespace arquetipo.API.Controllers.ClientePatio
         {
             try
             {
+                _logger.LogInformation("Asociación de cliente {identificacion} a patio", input.IdentificacionCliente);
                 var clientePatio = await _clientePatioInfraestructura.AsociarClientePatioAsync(input);
                 return Ok(clientePatio);
             }
             catch (CrAutoExcepcion ex)
             {
+                _logger.LogError(ex, "Error al asociar cliente {identificacion} a patio", input.IdentificacionCliente);
                 var result = Content(JsonSerializer.Serialize(new Error(ex)));
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return result;
@@ -43,11 +49,13 @@ namespace arquetipo.API.Controllers.ClientePatio
         {
             try
             {
+                _logger.LogInformation("Actualización de asociación de cliente {id} a patio", id);
                 var clientePatio = await _clientePatioInfraestructura.ActualizarAsociacionClientePatioAsync(id, input);
                 return Ok(clientePatio);
             }
             catch (CrAutoExcepcion ex)
             {
+                _logger.LogError(ex, "Error al actualizar asociación de cliente {id} a patio", id);
                 var result = Content(JsonSerializer.Serialize(new Error(ex)));
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return result;
@@ -60,11 +68,13 @@ namespace arquetipo.API.Controllers.ClientePatio
         {
             try
             {
+                _logger.LogInformation("Eliminando asociación de cliente {id} a patio", id);
                 var result = await _clientePatioInfraestructura.EliminarAsociacionClientePatioAsync(id);
                 return Ok(result);
             }
             catch (CrAutoExcepcion ex)
             {
+                _logger.LogError(ex, "Error al eliminar asociación de cliente {id} a patio", id);
                 var result = Content(JsonSerializer.Serialize(new Error(ex)));
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return result;

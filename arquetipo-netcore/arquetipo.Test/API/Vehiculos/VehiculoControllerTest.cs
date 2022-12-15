@@ -4,12 +4,14 @@ using arquetipo.Entity.Models;
 using arquetipo.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace arquetipo.Test.API.Vehiculos
 {
     public class VehiculoControllerTest
     {
         private readonly List<EVehiculo> _vehiculosSeed;
+        private readonly Mock<ILogger<VehiculoController>> _logger;
 
         public VehiculoControllerTest()
         {
@@ -40,6 +42,8 @@ namespace arquetipo.Test.API.Vehiculos
                     1.8f,
                     20000)
             };
+
+            _logger = new Mock<ILogger<VehiculoController>>();
         }
 
 
@@ -50,7 +54,9 @@ namespace arquetipo.Test.API.Vehiculos
             var vehiculoInfraestructuraMock = new Mock<IVehiculoInfraestructura>();
             vehiculoInfraestructuraMock.Setup(ci => ci.ConsultarVehiculosAsync())
                 .ReturnsAsync(_vehiculosSeed);
-            var vehiculoController = new VehiculoController(vehiculoInfraestructuraMock.Object);
+            var vehiculoController = new VehiculoController(
+                vehiculoInfraestructuraMock.Object,
+                _logger.Object);
 
             var result = await vehiculoController.ConsultarVehiculosAsync();
 
@@ -66,7 +72,9 @@ namespace arquetipo.Test.API.Vehiculos
             var vehiculoInfraestructuraMock = new Mock<IVehiculoInfraestructura>();
             vehiculoInfraestructuraMock.Setup(vi => vi.ConsultarVehiculoPorPlacaAsync(PLACA))
                 .ReturnsAsync(_vehiculosSeed.First(v => v.Placa == PLACA));
-            var vehiculoController = new VehiculoController(vehiculoInfraestructuraMock.Object)
+            var vehiculoController = new VehiculoController(
+                vehiculoInfraestructuraMock.Object,
+                _logger.Object)
             {
                 ControllerContext = new ControllerContext
                 {
@@ -87,7 +95,9 @@ namespace arquetipo.Test.API.Vehiculos
             vehiculoInfraestructuraMock.Setup(ci => ci.ConsultarVehiculoPorPlacaAsync(PLACA))
                 .ThrowsAsync(new CrAutoExcepcion(CrAutoErrores.VehiculoNoExisteError));
 
-            var vehiculoController = new VehiculoController(vehiculoInfraestructuraMock.Object)
+            var vehiculoController = new VehiculoController(
+                vehiculoInfraestructuraMock.Object,
+                _logger.Object)
             {
                 ControllerContext = new ControllerContext
                 {

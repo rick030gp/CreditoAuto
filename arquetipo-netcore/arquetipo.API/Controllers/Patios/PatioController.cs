@@ -14,16 +14,21 @@ namespace arquetipo.API.Controllers.Patios
     public class PatioController : ControllerBase
     {
         private readonly IPatioInfraestructura _patioInfraestructura;
+        private readonly ILogger<PatioController> _logger;
 
-        public PatioController(IPatioInfraestructura patioInfraestructura)
+        public PatioController(
+            IPatioInfraestructura patioInfraestructura,
+            ILogger<PatioController> logger)
         {
             _patioInfraestructura = patioInfraestructura;
+            _logger = logger;
         }
 
         [HttpGet]
         [Route("ConsultarTodos001")]
         public async Task<IEnumerable<EPatio>> ConsultarPatiosAsync()
         {
+            _logger.LogInformation("Consultando todos los patios");
             return await _patioInfraestructura.ConsultarPatiosAsync();
         }
 
@@ -33,11 +38,13 @@ namespace arquetipo.API.Controllers.Patios
         {
             try
             {
+                _logger.LogInformation("Consultando patio {numeroPuntoVenta}", numeroPuntoVenta);                
                 var patio = await _patioInfraestructura.ConsultarPatioPorPuntoVentaAsync(numeroPuntoVenta);
                 return Ok(patio);
             }
             catch (CrAutoExcepcion ex)
             {
+                _logger.LogError(ex, "Patio {numeroPuntoVenta} no encontrado", numeroPuntoVenta);
                 var result = Content(JsonSerializer.Serialize(new Error(ex)));
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.Accepted;
                 return result;
@@ -50,11 +57,13 @@ namespace arquetipo.API.Controllers.Patios
         {
             try
             {
+                _logger.LogInformation("Insertando patio {numeroPuntoVenta}", input.NumeroPuntoVenta);
                 var patio = await _patioInfraestructura.CrearPatioAsync(input);
                 return Ok(patio);
             }
             catch (CrAutoExcepcion ex)
             {
+                _logger.LogError(ex, "Inserción de patio {numeroPuntoVenta} fallida", input.NumeroPuntoVenta);
                 var result = Content(JsonSerializer.Serialize(new Error(ex)));
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return result;
@@ -67,11 +76,13 @@ namespace arquetipo.API.Controllers.Patios
         {
             try
             {
+                _logger.LogInformation("Actualizando patio {numeroPuntoVenta}", numeroPuntoVenta);
                 var patio = await _patioInfraestructura.ActualizarPatioAsync(numeroPuntoVenta, input);
                 return Ok(patio);
             }
             catch (CrAutoExcepcion ex)
             {
+                _logger.LogError(ex, "Actualización de patio {numeroPuntoVenta} fallida", numeroPuntoVenta);
                 var result = Content(JsonSerializer.Serialize(new Error(ex)));
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return result;
@@ -84,6 +95,7 @@ namespace arquetipo.API.Controllers.Patios
         {
             try
             {
+                _logger.LogInformation("Eliminando patio {numeroPuntoVenta}", numeroPuntoVenta);
                 var result = await _patioInfraestructura.EliminarPatioAsync(numeroPuntoVenta);
                 return Ok(result);
             }

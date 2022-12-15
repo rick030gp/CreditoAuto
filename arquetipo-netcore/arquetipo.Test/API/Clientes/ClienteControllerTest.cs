@@ -4,12 +4,14 @@ using arquetipo.Entity.Models;
 using arquetipo.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace arquetipo.Test.API.Clientes
 {
     public class ClienteControllerTest
     {
         private readonly List<ECliente> _clientesSeed;
+        private readonly Mock<ILogger<ClienteController>> _logger;
 
         public ClienteControllerTest()
         {
@@ -18,6 +20,8 @@ namespace arquetipo.Test.API.Clientes
                 new ECliente(Guid.NewGuid(), "CL01", "NOM01", "AP01", 22, Convert.ToDateTime("12/01/2000"), "D01", "TL01", "SOLTERO", null, null, true),
                 new ECliente(Guid.NewGuid(), "CL02", "NOM02", "AP02", 20, Convert.ToDateTime("12/01/2002"), "D02", "TL02", "SOLTERO", null, null, false),
             };
+
+            _logger = new Mock<ILogger<ClienteController>>();
         }
 
         #region ConsultarClientesAsync
@@ -27,7 +31,9 @@ namespace arquetipo.Test.API.Clientes
             var clienteInfraestructuraMock = new Mock<IClienteInfraestructura>();
             clienteInfraestructuraMock.Setup(ci => ci.ConsultarClientesAsync())
                 .ReturnsAsync(_clientesSeed);
-            var clienteController = new ClienteController(clienteInfraestructuraMock.Object);
+            var clienteController = new ClienteController(
+                clienteInfraestructuraMock.Object,
+                _logger.Object);
 
             var result = await clienteController.ConsultarClientesAsync();
 
@@ -43,7 +49,9 @@ namespace arquetipo.Test.API.Clientes
             var clienteInfraestructuraMock = new Mock<IClienteInfraestructura>();
             clienteInfraestructuraMock.Setup(ci => ci.ConsultarClientePorIdentificacionAsync(IDENTIFICACION))
                 .ReturnsAsync(_clientesSeed.First(c => c.Identificacion == IDENTIFICACION));
-            var clienteController = new ClienteController(clienteInfraestructuraMock.Object)
+            var clienteController = new ClienteController(
+                clienteInfraestructuraMock.Object,
+                _logger.Object)
             {
                 ControllerContext = new ControllerContext
                 {
@@ -64,7 +72,9 @@ namespace arquetipo.Test.API.Clientes
             clienteInfraestructuraMock.Setup(ci => ci.ConsultarClientePorIdentificacionAsync(IDENTIFICACION))
                 .ThrowsAsync(new CrAutoExcepcion(CrAutoErrores.ClienteNoExisteError));
 
-            var clienteController = new ClienteController(clienteInfraestructuraMock.Object)
+            var clienteController = new ClienteController(
+                clienteInfraestructuraMock.Object,
+                _logger.Object)
             {
                 ControllerContext = new ControllerContext
                 {
